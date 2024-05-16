@@ -57,21 +57,21 @@ namespace Persistence
                 {
                     new Project
                     {
-                        Title = "Test blog 1",
+                        Title = "Test project 1",
                         Content = "<p>stupid</p>",
                         Category = "webdev",
                         Image = "https://res.cloudinary.com/dobxnbfvx/image/upload/v1714269552/ysbtccbjtlu2i2biptoj.png"
                     },
                     new Project
                     {
-                        Title = "Test blog 2",
+                        Title = "Test project 2",
                         Content = "<p>gdfgdfg</p>",
                         Category = "gamedev",
                         Image = "https://res.cloudinary.com/dobxnbfvx/image/upload/v1714269348/qdr5bkh8ctzad7bn8mbu.png"
                     },
                     new Project
                     {
-                        Title = "Test blog 2",
+                        Title = "Test project 2",
                         Content = "<p>other</p>",
                         Category = "other",
                         Image = "https://res.cloudinary.com/dobxnbfvx/image/upload/v1714094769/o1rc4u7zftpfz0qv1aok.jpg"

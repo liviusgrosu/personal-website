@@ -30,20 +30,20 @@ namespace Persistence
                     new BlogPost
                     {
                         Title = "Test blog 1",
-                        Image = "image.png",
-                        Content = "<p>stupid</p>"
+                        Content = "<p>stupid</p>",
+                        Date = DateTime.UtcNow.AddMonths(-1),
                     },
                     new BlogPost
                     {
                         Title = "Test blog 2",
-                        Image = "image.png",
-                        Content = "<p>gdfgdfg</p>"
+                        Content = "<p>gdfgdfg</p>",
+                        Date = DateTime.UtcNow.AddMonths(-2),
                     },
                     new BlogPost
                     {
                         Title = "Test blog 2",
-                        Image = "image.png",
-                        Content = "<p>asdasdas</p>"
+                        Content = "<p>asdasdas</p>",
+                        Date = DateTime.UtcNow.AddMonths(-3),
                     }
                 };
 

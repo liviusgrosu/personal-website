@@ -10,6 +10,7 @@ namespace Application.Core
         public MappingProfiles()
         {
             CreateMap<Domain.About, AboutDto>();
+            CreateMap<BlogPost, BlogPost>();
             CreateMap<BlogPost, BlogPostDto>();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Application.Core;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -9,12 +10,12 @@ namespace Application.Blog
 {
     public class Details
     {
-        public class Query : IRequest<Result<BlogPostDto>>
+        public class Query : IRequest<Result<BlogPost>>
         {
             public Guid BlogId { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, Result<BlogPostDto>>
+        public class Handler : IRequestHandler<Query, Result<BlogPost>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -25,10 +26,9 @@ namespace Application.Blog
                 _mapper = mapper;
             }
 
-            public async Task<Result<BlogPostDto>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<BlogPost>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var blog = await _context.BlogPosts
-                    .ProjectTo<BlogPostDto>(_mapper.ConfigurationProvider)
                     .FirstOrDefaultAsync(b => b.Id == request.BlogId);
 
                 if (blog == null)
@@ -36,7 +36,7 @@ namespace Application.Blog
                     return null;
                 }
 
-                return Result<BlogPostDto>.Success(blog);
+                return Result<BlogPost>.Success(blog);
             }
         }
     }

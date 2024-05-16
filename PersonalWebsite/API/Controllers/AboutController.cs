@@ -4,20 +4,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [AllowAnonymous]
+    
     public class AboutController : BaseApiController
     {
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAbout()
         {
             return HandleResult(await Mediator.Send(new Details.Query { }));
         }
 
-        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> EditAbout(AboutDto content)
+        public async Task<IActionResult> EditAbout(AboutDto aboutContent)
         {
-            return HandleResult(await Mediator.Send(new Details.Query { }));
+            return HandleResult(await Mediator.Send(new Edit.Command { AboutContent = aboutContent }));
         }
     }
 }

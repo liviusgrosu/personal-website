@@ -1,4 +1,5 @@
 ﻿using Application.Blog;
+using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,20 +20,20 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new Details.Query { BlogId = blogId }));
         }
-        /*
+        
         [HttpPost]
         public async Task<IActionResult> CreateBlogPost(BlogPost blogPost)
         {
-            return HandleResult(await Mediator.Send(new Create.Command { Activity = activity }));
+            return HandleResult(await Mediator.Send(new Create.Command { BlogPost = blogPost }));
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> EditActivity(Guid id, BlogPost blogPost)
+        
+        [HttpPut]
+        public async Task<IActionResult> EditActivity(BlogPost blogPost)
         {
-            blogPost.Id = id;
-            return HandleResult(await Mediator.Send(new Edit.Command { Activity = activity }));
+            return HandleResult(await Mediator.Send(new Edit.Command { BlogPost = blogPost }));
         }
-
+        /*
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteActivity(Guid id)
         {

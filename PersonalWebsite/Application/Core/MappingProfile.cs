@@ -1,5 +1,6 @@
 ﻿using Application.About;
 using Application.Blog;
+using Application.Projects;
 using AutoMapper;
 using Domain;
 
@@ -12,6 +13,7 @@ namespace Application.Core
             CreateMap<Domain.About, AboutDto>();
             CreateMap<BlogPost, BlogPost>();
             CreateMap<BlogPost, BlogPostDto>();
+            CreateMap<Project, ProjectDto>();
         }
     }
 }

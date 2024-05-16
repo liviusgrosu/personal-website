@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.Projects
 {
-    public class ProjectDto
+    public class ProjectsFilter
     {
-        public Guid Id { get; set; }
-        public string Title { get; set; }
         public string Category { get; set; }
-        public string Image { get; set; }
     }
 }

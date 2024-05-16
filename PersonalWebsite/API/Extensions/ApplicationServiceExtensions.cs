@@ -1,10 +1,10 @@
-﻿using Application.Projects;
-using Application.Core;
+﻿using Application.Core;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence;
+using Application.Blog;
 
 namespace API.Extensions
 {
@@ -32,8 +32,8 @@ namespace API.Extensions
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(List.Handler).Assembly));
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
-            //services.AddFluentValidationAutoValidation();
-            //services.AddValidatorsFromAssemblyContaining<Create>();
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<Create>();
             services.AddHttpContextAccessor();
             //services.AddSignalR();
 

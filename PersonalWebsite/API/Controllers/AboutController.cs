@@ -1,9 +1,10 @@
 ﻿using Application.About;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-
+    [AllowAnonymous]
     public class AboutController : BaseApiController
     {
         [HttpGet]
@@ -12,11 +13,11 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Details.Query { }));
         }
 
-/*        [Authorize]
+        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> EditAbout(Activity activity)
+        public async Task<IActionResult> EditAbout(AboutDto content)
         {
-            return new NotImplementedException();
-        }*/
+            return HandleResult(await Mediator.Send(new Details.Query { }));
+        }
     }
 }

@@ -10,7 +10,7 @@ using System.Security.Claims;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class AccountController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;

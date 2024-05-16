@@ -1,5 +1,7 @@
 ﻿using Application.About;
+using Application.Blog;
 using AutoMapper;
+using Domain;
 
 namespace Application.Core
 {
@@ -8,6 +10,7 @@ namespace Application.Core
         public MappingProfiles()
         {
             CreateMap<Domain.About, AboutDto>();
+            CreateMap<BlogPost, BlogPostDto>();
         }
     }
 }

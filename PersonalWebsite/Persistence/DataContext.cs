@@ -14,6 +14,7 @@ namespace Persistence
         }
 
         public DbSet<About> AboutEntry { get; set; }
+        public DbSet<BlogPost> BlogPosts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

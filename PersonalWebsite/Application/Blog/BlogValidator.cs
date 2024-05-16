@@ -8,7 +8,6 @@ namespace Application.Blog
         public BlogValidator()
         {
             RuleFor(x => x.Title).NotEmpty();
-            RuleFor(x => x.Content).NotEmpty();
             RuleFor(x => x.Date).NotEmpty();
         }
     }

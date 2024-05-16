@@ -13,6 +13,7 @@ namespace Application.Core
             CreateMap<Domain.About, AboutDto>();
             CreateMap<BlogPost, BlogPost>();
             CreateMap<BlogPost, BlogPostDto>();
+            CreateMap<Project, Project>();
             CreateMap<Project, ProjectDto>();
         }
     }

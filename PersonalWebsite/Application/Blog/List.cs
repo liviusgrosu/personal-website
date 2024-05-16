@@ -27,11 +27,6 @@ namespace Application.Blog
                 var blogs = await _context.BlogPosts
                     .ProjectTo<BlogPostDto>(_mapper.ConfigurationProvider)
                     .ToListAsync();
-
-                if (!blogs.Any())
-                {
-                    return null;
-                }
                 
                 return Result<List<BlogPostDto>>.Success(blogs);
             }

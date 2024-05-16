@@ -33,7 +33,7 @@ namespace Application.Blog
 
                 if (blog == null)
                 {
-                    return null;
+                    return Result<BlogPost>.Failure("Blog post not found");
                 }
 
                 return Result<BlogPost>.Success(blog);

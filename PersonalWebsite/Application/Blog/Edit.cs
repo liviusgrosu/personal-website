@@ -45,7 +45,7 @@ namespace Application.Blog
 
                 if (blogPost == null)
                 {
-                    return null;
+                    return Result<Unit>.Failure("Blog post not found");
                 }
 
                 _mapper.Map(request.BlogPost, blogPost);

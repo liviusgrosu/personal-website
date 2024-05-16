@@ -1,6 +1,6 @@
 using API.Extensions;
 using API.Middleware;
-using Domain;
+//using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -50,9 +50,8 @@ try
     // Get the data context service and execute any pending migrations
     // As in update the database
     var context = services.GetRequiredService<DataContext>();
-    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
     await context.Database.MigrateAsync();
-    await Seed.SeedData(context, userManager);
 }
 catch (Exception ex)
 {

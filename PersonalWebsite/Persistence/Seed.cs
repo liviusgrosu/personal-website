@@ -9,8 +9,7 @@ namespace Persistence
         public static async Task SeedData(DataContext context,
             UserManager<IdentityUser> userManager)
         {
-            if (!userManager.Users.Any() &&
-                !context.BlogPosts.Any())
+            if (!userManager.Users.Any())
             {
                 await userManager.CreateAsync(new IdentityUser
                 {
@@ -24,7 +23,10 @@ namespace Persistence
                         Content = "<p>Test</p>"
                     }
                 );
+            }
 
+            if (!context.BlogPosts.Any())
+            {
                 var testBlogPosts = new List<BlogPost>
                 {
                     new BlogPost
@@ -46,10 +48,38 @@ namespace Persistence
                         Date = DateTime.UtcNow.AddMonths(-3),
                     }
                 };
-
                 await context.BlogPosts.AddRangeAsync(testBlogPosts);
-                await context.SaveChangesAsync();
             }
+
+            if (!context.Projects.Any())
+            {
+                var testProjects = new List<Project>
+                {
+                    new Project
+                    {
+                        Title = "Test blog 1",
+                        Content = "<p>stupid</p>",
+                        Category = "webdev",
+                        Image = "https://res.cloudinary.com/dobxnbfvx/image/upload/v1714269552/ysbtccbjtlu2i2biptoj.png"
+                    },
+                    new Project
+                    {
+                        Title = "Test blog 2",
+                        Content = "<p>gdfgdfg</p>",
+                        Category = "gamedev",
+                        Image = "https://res.cloudinary.com/dobxnbfvx/image/upload/v1714269348/qdr5bkh8ctzad7bn8mbu.png"
+                    },
+                    new Project
+                    {
+                        Title = "Test blog 2",
+                        Content = "<p>other</p>",
+                        Category = "other",
+                        Image = "https://res.cloudinary.com/dobxnbfvx/image/upload/v1714094769/o1rc4u7zftpfz0qv1aok.jpg"
+                    }
+                };
+                await context.Projects.AddRangeAsync(testProjects);
+            }
+            await context.SaveChangesAsync();
         }
     }
 }

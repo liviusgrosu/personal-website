@@ -4,20 +4,12 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Blog
 {
     public class List
     {
-        public class Query : IRequest<Result<List<BlogPostDto>>>
-        {
-            public string Category { get; set; }
-        }
+        public class Query : IRequest<Result<List<BlogPostDto>>>{ }
 
         public class Handler : IRequestHandler<Query, Result<List<BlogPostDto>>>
         {

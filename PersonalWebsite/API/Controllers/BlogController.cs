@@ -1,25 +1,25 @@
-﻿using Domain;
-using Application.Blog;
+﻿using Application.Blog;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace API.Controllers
 {
-    public class BlogControllers : BaseApiController
+    public class BlogController : BaseApiController
     {
-        [HttpGet("filter/{predicate}")]
-        public async Task<IActionResult> GetBlogPosts(string category)
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> GetBlogPosts()
         {
-            return HandleResult(await Mediator.Send(new List.Query { Category = category }));
+            return HandleResult(await Mediator.Send(new List.Query { }));
         }
 
-/*        [HttpGet("{id}")]
-        public async Task<IActionResult> GetBlogPost(Guid id)
+        [AllowAnonymous]
+        [HttpGet("{blogId}")]
+        public async Task<IActionResult> GetBlogPost(Guid blogId)
         {
-            return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
+            return HandleResult(await Mediator.Send(new Details.Query { BlogId = blogId }));
         }
-
+        /*
         [HttpPost]
         public async Task<IActionResult> CreateBlogPost(BlogPost blogPost)
         {

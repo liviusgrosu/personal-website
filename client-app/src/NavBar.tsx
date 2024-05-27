@@ -11,19 +11,24 @@ export default function NavBar() {
             compact
         >
             <Menu.Item
-                name='home'
+                name='about'
                 active={state === 'home'}
                 onClick={() => setState('home')}
             />
             <Menu.Item
-                name='messages'
+                name='portfolio'
                 active={state === 'messages'}
                 onClick={() => setState('messages')}
             />
             <Menu.Item
-                name='friends'
+                name='blog'
                 active={state === 'friends'}
                 onClick={() => setState('friends')}
+            />
+            <Menu.Item
+                name='contact'
+                active={state === 'contact'}
+                onClick={() => setState('contact')}
             />
         </Menu>
     )

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useStore } from "../app/stores/store"
 import { observer } from "mobx-react-lite";
 import DOMPurify from "dompurify";
-import { Card, Grid, Header, Tab } from "semantic-ui-react";
+import { Card, Grid, Tab } from "semantic-ui-react";
 import ProjectCard from "./ProjectCard";
 export default observer (function ProjectsPage() {
     const {projectStore: {loadProjects, projects}} = useStore();

@@ -1,8 +1,8 @@
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
 
 export default function NavBar() {
-    const [state, setState] = useState('');
 
     return (
         <Menu 
@@ -12,23 +12,13 @@ export default function NavBar() {
         >
             <Menu.Item
                 name='about'
-                active={state === 'home'}
-                onClick={() => setState('home')}
+                as={NavLink}
+                to='/about'
             />
             <Menu.Item
                 name='portfolio'
-                active={state === 'messages'}
-                onClick={() => setState('messages')}
-            />
-            <Menu.Item
-                name='blog'
-                active={state === 'friends'}
-                onClick={() => setState('friends')}
-            />
-            <Menu.Item
-                name='contact'
-                active={state === 'contact'}
-                onClick={() => setState('contact')}
+                as={NavLink}
+                to='/projects'
             />
         </Menu>
     )

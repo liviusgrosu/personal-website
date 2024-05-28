@@ -1,9 +1,9 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import App from "../../App";
 import AboutPage from "../../features/AboutPage"
-import PortfolioPage from "../../features/PortfolioPage";
 import BlogPage from "../../features/BlogPage";
 import ContactPage from "../../features/ContactPage";
+import ProjectsPage from "../../features/ProjectsPage";
 
 export const router = createBrowserRouter([
     {
@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
         children: 
         [
             { path: 'about', element: <AboutPage/> },
-            { path: 'portfolio', element: <PortfolioPage/> },
+            { path: 'projects', element: <ProjectsPage/> },
             { path: 'blog', element: <BlogPage/> },
             { path: 'contact', element: <ContactPage/> },
             { path: '/', element: <Navigate to="/about" /> }

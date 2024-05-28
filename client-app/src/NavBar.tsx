@@ -10,14 +10,19 @@ export default function NavBar() {
             compact
         >
             <Menu.Item
-                name='about'
+                name='About'
                 as={NavLink}
                 to='/about'
             />
             <Menu.Item
-                name='portfolio'
+                name='Portfolio'
                 as={NavLink}
                 to='/projects'
+            />
+            <Menu.Item
+                name='Blog Posts'
+                as={NavLink}
+                to='/blog'
             />
         </Menu>
     )

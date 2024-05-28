@@ -10,7 +10,7 @@ interface Props {
 
 export default observer(function ProfileCard({project}: Props) {
     return (
-        <Card>
+        <Card as={Link} to={`/projects/${project.id}`}>
             <Image src={project.image || '/placeholder.png'} />
             <Card.Content>
                 <Card.Header>{project.title}</Card.Header>

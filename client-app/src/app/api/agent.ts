@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { About } from "../models/about";
+import { Project } from "../models/project";
 
 axios.defaults.baseURL = 'http://localhost:7117';
 
@@ -18,8 +19,13 @@ const About = {
     get: () => requests.get<About>('/about')
 }
 
+const Projects = {
+    get: (predicate: string) => requests.get<Project[]>(`/project?category=${predicate}`) 
+}
+
 const agent = {
-    About
+    About,
+    Projects
 }
 
 export default agent;

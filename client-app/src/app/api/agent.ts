@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { About } from "../models/about";
-import { Project } from "../models/project";
+import { Project, ProjectDetail } from "../models/project";
 
 axios.defaults.baseURL = 'http://localhost:7117';
 
@@ -20,7 +20,8 @@ const About = {
 }
 
 const Projects = {
-    get: (predicate: string) => requests.get<Project[]>(`/project?category=${predicate}`) 
+    getList: (predicate: string) => requests.get<Project[]>(`/project?category=${predicate}`),
+    getDetails: (id: string) => requests.get<ProjectDetail>(`/project/${id}`)
 }
 
 const agent = {

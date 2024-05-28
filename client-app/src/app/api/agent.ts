@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { About } from "../models/about";
 import { Project, ProjectDetail } from "../models/project";
+import { BlogPost, BlogPostDetail } from "../models/blogPost";
 
 axios.defaults.baseURL = 'http://localhost:7117';
 
@@ -24,9 +25,15 @@ const Projects = {
     getDetails: (id: string) => requests.get<ProjectDetail>(`/project/${id}`)
 }
 
+const Blogs = {
+    getList:  () => requests.get<BlogPost[]>('/blogPost'),
+    getDetails: (id: string) => requests.get<BlogPostDetail>(`/blogPost/${id}`)
+}
+
 const agent = {
     About,
-    Projects
+    Projects,
+    Blogs
 }
 
 export default agent;

@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { About } from "../models/about";
 import { Project, ProjectDetail } from "../models/project";
 import { BlogPost, BlogPostDetail } from "../models/blogPost";
+import { User, UserFormValues } from "../models/user";
 
 axios.defaults.baseURL = 'http://localhost:7117';
 
@@ -30,10 +31,16 @@ const Blogs = {
     getDetails: (id: string) => requests.get<BlogPostDetail>(`/blogPost/${id}`)
 }
 
+const Account = {
+    current: () => requests.get<User>('/account'),
+    login: (user: UserFormValues) => requests.post<User>('/account/login', user),
+}
+
 const agent = {
     About,
     Projects,
-    Blogs
+    Blogs,
+    Account
 }
 
 export default agent;

@@ -41,6 +41,16 @@ namespace API.Controllers
             return Unauthorized();
         }
 
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+            var user = await _userManager.Users
+                .FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
+
+            return CreateUserObject(user);
+        }
+
         private UserDto CreateUserObject(IdentityUser user)
         {
             return new UserDto

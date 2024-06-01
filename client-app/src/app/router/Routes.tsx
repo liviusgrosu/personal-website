@@ -6,6 +6,7 @@ import ProjectsPage from "../../features/ProjectsPage";
 import ProjectDetail from "../../features/ProjectDetail";
 import BlogPosts from "../../features/BlogPosts";
 import BlogPostDetail from "../../features/BlogPostDetail";
+import LoginForm from "../../features/LoginForm";
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
             { path: 'blog', element: <BlogPosts/> },
             { path: 'blog/:id', element: <BlogPostDetail/> },
             { path: 'contact', element: <ContactPage/> },
+            { path: 'login', element: <LoginForm/>},
             { path: '/', element: <Navigate to="/about" /> }
         ]
     }

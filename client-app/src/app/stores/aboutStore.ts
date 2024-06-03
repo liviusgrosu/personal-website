@@ -9,11 +9,8 @@ export default class AboutStore {
     }
 
     loadAbout = async () => {
-        console.log('loading about');
         try {
             const aboutText = await agent.About.get();
-            console.log(aboutText);
-            
             runInAction(() => {
                 this.aboutText = aboutText.content;
             })

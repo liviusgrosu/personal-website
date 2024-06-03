@@ -11,11 +11,8 @@ export default class ProjectStore {
     }
 
     loadProjects = async (predicate: string) => {
-        console.log('loading projects');
         try {
             const projects = await agent.Projects.getList(predicate);
-            console.log(projects);
-            
             runInAction(() => {
                 this.projects = projects;
             })
@@ -25,11 +22,8 @@ export default class ProjectStore {
     }
 
     loadProjectDetails = async (id: string) => {
-        console.log(`loading project details for ${id}`);
         try {
             const selectedProject = await agent.Projects.getDetails(id);
-            console.log(selectedProject);
-            
             runInAction(() => {
                 this.selectedProjectDetails = selectedProject.content;
             })

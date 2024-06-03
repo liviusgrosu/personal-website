@@ -11,11 +11,8 @@ export default class BlogPostStore {
     }
 
     loadBlogPosts = async () => {
-        console.log('loading blog posts');
         try {
             const blogPosts = await agent.Blogs.getList();
-            console.log(blogPosts);
-            
             runInAction(() => {
                 this.blogPosts = blogPosts;
             })
@@ -25,11 +22,8 @@ export default class BlogPostStore {
     }
 
     loadBlogPostsDetails = async (id: string) => {
-        console.log(`loading blog post details for ${id}`);
         try {
             const selectedBlogPost = await agent.Blogs.getDetails(id);
-            console.log(selectedBlogPost);
-            
             runInAction(() => {
                 this.selectedBlogPostDetails = selectedBlogPost.content;
             })

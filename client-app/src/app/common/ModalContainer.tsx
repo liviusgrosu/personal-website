@@ -10,10 +10,11 @@ export default observer ( function ModalContainer() {
             open={modalStore.modal.open} 
             onClose={modalStore.closeModal}
             size="small"
-            centered
             closeIcon
         >
-            <Header content='Change Cover Photo' />
+            {modalStore.modal.header !== '' && (
+                <Header content={modalStore.modal.header} />
+            )}
             <Modal.Content>
                 {modalStore.modal.body}
             </Modal.Content>

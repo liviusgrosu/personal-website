@@ -33,7 +33,10 @@ export default observer(function ProfileCard({project}: Props) {
                         basic 
                         color="blue" 
                         style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1 }}
-                        onClick={(e) => {e.stopPropagation(); modalStore.openModal(<PhotoUploadWidget uploadPhoto={handlePhotoUpload}/>)}} // Prevents triggering the link
+                        onClick={(e) => {e.stopPropagation(); modalStore.openModal(
+                            <PhotoUploadWidget uploadPhoto={handlePhotoUpload}/>,
+                            'Change Cover Photo'
+                        )}}
                     />
                 )}
             </div>

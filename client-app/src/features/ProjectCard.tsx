@@ -29,7 +29,7 @@ export default observer(function ProfileCard({project}: Props) {
                 </Link>
                 {token !== null && (
                     <Button 
-                        icon="pencil icon"
+                        icon="pencil"
                         basic 
                         color="blue" 
                         style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1 }}

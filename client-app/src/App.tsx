@@ -3,6 +3,7 @@ import { Container, Header, Segment } from "semantic-ui-react";
 import NavBar from "./NavBar";
 import { Outlet } from "react-router-dom";
 import { observer } from "mobx-react-lite";
+import ModalContainer from "./app/common/ModalContainer";
 
 export default observer(function App() {
   return (
@@ -11,6 +12,7 @@ export default observer(function App() {
       textAlign = "center"
       vertical
     >
+      <ModalContainer/>
       <Container as="nav">
         <Header inverted as="h1">
             Livius Grosu

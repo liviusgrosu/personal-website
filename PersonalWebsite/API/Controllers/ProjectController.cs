@@ -38,5 +38,11 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new Delete.Command { Id = id }));
         }
+
+        [HttpPost("coverPhoto")]
+        public async Task<IActionResult> ChangePhoto([FromForm] ChangePhoto.Command command)
+        {
+            return HandleResult(await Mediator.Send(command));
+        }
     }
 }

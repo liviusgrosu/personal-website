@@ -2,9 +2,11 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Persistence;
 using Application.Blog;
+using Application.Interfaces;
+using Infrastructure.Photos;
+
 
 namespace API.Extensions
 {
@@ -34,8 +36,9 @@ namespace API.Extensions
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<Create>();
+            services.AddScoped<IPhotoAccessor, PhotoAccessor>();
+            services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
             services.AddHttpContextAccessor();
-            //services.AddSignalR();
 
             return services;
         }

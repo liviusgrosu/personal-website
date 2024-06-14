@@ -3,6 +3,7 @@ using Application.Interfaces;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Application.Projects
         public class Command : IRequest<Result<Photo>>
         {
             public IFormFile File { get; set; }
+            public Guid ProjectId { get; set; }
         }
 
         public class Handler : IRequestHandler<Command, Result<Photo>>
@@ -32,6 +34,14 @@ namespace Application.Projects
 
             public async Task<Result<Photo>> Handle(Command request, CancellationToken cancellationToken)
             {
+                var project = await _context.Projects
+                    .FirstOrDefaultAsync(b => b.Id == request.ProjectId);
+
+                if (project == null)
+                {
+                    return Result<Photo>.Failure("Project not found");
+                }
+
                 var photoUploadREsult = await _photoAccessor.AddPhoto(request.File);
 
                 var photo = new Photo
@@ -41,6 +51,7 @@ namespace Application.Projects
                 };
 
                 _context.Photos.Add(photo);
+                project.Image = photo.Url;
 
                 var result = await _context.SaveChangesAsync() > 0;
                 if (result)

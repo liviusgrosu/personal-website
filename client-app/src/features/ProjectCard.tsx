@@ -11,11 +11,12 @@ interface Props {
 }
 
 export default observer(function ProfileCard({project}: Props) {
-    const {commonStore, modalStore} = useStore();
+    const {commonStore, modalStore, projectStore} = useStore();
     const {token} = commonStore; 
+    const {uploadPhoto} = projectStore;
 
     function handlePhotoUpload(file: Blob) {
-        console.log("file uploading = " + file);
+        uploadPhoto(project.id, file);
     }
 
     return (

@@ -1,12 +1,19 @@
 import axios, { AxiosResponse } from "axios";
 import { About } from "../models/about";
-import { Project, ProjectDetail } from "../models/project";
+import { Photo, Project, ProjectDetail } from "../models/project";
 import { BlogPost, BlogPostDetail } from "../models/blogPost";
 import { User, UserFormValues } from "../models/user";
+import { store } from "../stores/store";
 
 axios.defaults.baseURL = 'http://localhost:7117';
 
-console.log('Axios base URL:', axios.defaults.baseURL);
+axios.interceptors.request.use(config => {
+    const token = store.commonStore.token;
+    if(token && config.headers) {
+      config.headers.Authorization = `Bearer ${token}`;
+    } 
+    return config;
+  })
 
 const responseBody = <T> (response: AxiosResponse<T>) => response.data;
 
@@ -23,7 +30,15 @@ const About = {
 
 const Projects = {
     getList: (predicate: string) => requests.get<Project[]>(`/project?category=${predicate}`),
-    getDetails: (id: string) => requests.get<ProjectDetail>(`/project/${id}`)
+    getDetails: (id: string) => requests.get<ProjectDetail>(`/project/${id}`),
+    updateDetails: (details: ProjectDetail) => requests.put(`/project`, details),
+    updatePhoto: (id: string, file: Blob) => {
+        const formData = new FormData;
+        formData.append('File', file);
+        return axios.post<Photo>(`/project/coverPhoto/${id}`, formData, {
+            headers: {'Content-Type': 'multipart/form-data'}
+        })
+    }
 }
 
 const Blogs = {

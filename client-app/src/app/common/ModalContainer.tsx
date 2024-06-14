@@ -9,7 +9,7 @@ export default observer ( function ModalContainer() {
         <Modal 
             open={modalStore.modal.open} 
             onClose={modalStore.closeModal}
-            size="small"
+            size="tiny"
             closeIcon
         >
             {modalStore.modal.header !== '' && (

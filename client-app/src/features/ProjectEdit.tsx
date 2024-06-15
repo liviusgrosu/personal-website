@@ -9,9 +9,8 @@ import ReactQuill from "react-quill";
 export default observer(function ProjectEdit() {
     const navigate = useNavigate();
     const {projectStore} = useStore();
-    const {selectedProjectDetails, loadProjectDetails, clearSelectedProjectDetails} = projectStore;
+    const {selectedProjectDetails, loadProjectDetails, clearSelectedProjectDetails, updateProjectDetails} = projectStore;
     const {id} = useParams();
-
     const [reactQuillContent, setReactQuillContent] = useState('');
 
     useEffect(() => {
@@ -34,8 +33,9 @@ export default observer(function ProjectEdit() {
         navigate('/projects');
     };
 
-    const handleSubmit = () => {
-        console.log(reactQuillContent);
+    const handleSubmit = async () => {
+        await updateProjectDetails(reactQuillContent);
+        navigate(`/projects/${id}`);
     };
 
     const handleChange = (value: string) => {

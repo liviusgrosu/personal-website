@@ -35,13 +35,16 @@ export default class ProjectStore {
         }
     }
 
-    // saveProjectDetails = async (content: string) => {
-    //     try {
-            
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+    updateProjectDetails = async (content: string) => {
+        try {
+            if (this.selectedProjectDetails) {
+                this.selectedProjectDetails.content = content;
+                await agent.Projects.updateDetails(this.selectedProjectDetails);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     uploadPhoto = async (id: string, file: Blob) => {
         try {

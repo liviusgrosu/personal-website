@@ -3,7 +3,6 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
 import { useEffect } from "react";
-import DOMPurify from "dompurify";
 import { Button } from "semantic-ui-react";
 
 export default observer(function ProjectDetail() {
@@ -27,16 +26,16 @@ export default observer(function ProjectDetail() {
         navigate('/projects');
     };
 
-    const sanitizedHtml = DOMPurify.sanitize(selectedProjectDetails);
-
     return (
         <>
         <Button 
             icon="left arrow icon" 
             content="Back"
             onClick={handleBack}
-        />            
-        <div dangerouslySetInnerHTML={{__html: sanitizedHtml}}/>
+        />
+            {selectedProjectDetails && (
+                <div dangerouslySetInnerHTML={{__html: selectedProjectDetails.content}}/>
+            )}            
         </>
     )
 })

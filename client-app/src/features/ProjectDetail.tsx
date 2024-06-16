@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
 import { useEffect } from "react";
-import { Button } from "semantic-ui-react";
+import { Button, Header } from "semantic-ui-react";
 
 export default observer(function ProjectDetail() {
     const navigate = useNavigate();
@@ -34,7 +34,10 @@ export default observer(function ProjectDetail() {
             onClick={handleBack}
         />
             {selectedProjectDetails && (
-                <div dangerouslySetInnerHTML={{__html: selectedProjectDetails.content}}/>
+                <>
+                    <Header content={selectedProjectDetails.title} />
+                    <div dangerouslySetInnerHTML={{__html: selectedProjectDetails.content}}/>
+                </>
             )}            
         </>
     )

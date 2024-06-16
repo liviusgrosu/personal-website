@@ -35,9 +35,10 @@ export default class ProjectStore {
         }
     }
 
-    updateProjectDetails = async (content: string) => {
+    updateProjectDetails = async (title: string, content: string) => {
         try {
             if (this.selectedProjectDetails) {
+                this.selectedProjectDetails.title = title;
                 this.selectedProjectDetails.content = content;
                 await agent.Projects.updateDetails(this.selectedProjectDetails);
             }

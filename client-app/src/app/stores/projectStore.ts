@@ -1,8 +1,9 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
-import { Project, IProjectDetail } from "../models/project";
+import { Project, IProjectDetail, ProjectDetail } from "../models/project";
 import DOMPurify from "dompurify";
 import { store } from "./store";
+import { v4 as uuid } from "uuid";
 
 export default class ProjectStore {
     projects: Project[] = [];
@@ -35,13 +36,20 @@ export default class ProjectStore {
         }
     }
 
-    // createProjectDetails = async(title: string, content: string) =>  {
-    //     try {
-    //         let newProject = new ProjectDetail
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+    createProjectDetails = async(title: string, category: string, content: string) =>  {
+        try {
+            await agent.Projects.createDetails(
+                new ProjectDetail(
+                    uuid(), 
+                    title, 
+                    category, 
+                    content
+                )
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     updateProjectDetails = async (title: string, category: string, content: string) => {
         try {

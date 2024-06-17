@@ -2,9 +2,9 @@
 import { useEffect } from "react";
 import { useStore } from "../app/stores/store"
 import { observer } from "mobx-react-lite";
-import DOMPurify from "dompurify";
-import { Card, Grid, Tab } from "semantic-ui-react";
+import { Button, Card, Grid, Tab } from "semantic-ui-react";
 import ProjectCard from "./ProjectCard";
+import { Link } from "react-router-dom";
 export default observer (function ProjectsPage() {
     const {projectStore: {loadProjects, projects}} = useStore();
     
@@ -29,6 +29,12 @@ export default observer (function ProjectsPage() {
                     onTabChange={(_, data) => loadProjects(panes[data.activeIndex as number].key)}
                 />
                 <br/>
+                <Button 
+                    icon="plus icon" 
+                    content="New Portfolio"
+                    as={Link}
+                    to={`/projects-create`}
+                />    
                 <Card.Group itemsPerRow={3}>
                     {projects.map(project => (
                         <ProjectCard key={project.id} project={project}/>

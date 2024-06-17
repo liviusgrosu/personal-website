@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { About } from "../models/about";
-import { Photo, Project, ProjectDetail } from "../models/project";
+import { Photo, Project, IProjectDetail, ProjectDetail } from "../models/project";
 import { BlogPost, BlogPostDetail } from "../models/blogPost";
 import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store";
@@ -30,8 +30,9 @@ const About = {
 
 const Projects = {
     getList: (predicate: string) => requests.get<Project[]>(`/project?category=${predicate}`),
-    getDetails: (id: string) => requests.get<ProjectDetail>(`/project/${id}`),
-    updateDetails: (details: ProjectDetail) => requests.put(`/project`, details),
+    getDetails: (id: string) => requests.get<IProjectDetail>(`/project/${id}`),
+    createDetails: (details: ProjectDetail) => requests.post(`/project`, details),
+    updateDetails: (details: IProjectDetail) => requests.put(`/project`, details),
     updatePhoto: (id: string, file: Blob) => {
         const formData = new FormData;
         formData.append('File', file);

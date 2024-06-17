@@ -26,6 +26,18 @@ export interface IProjectDetail extends IProject {
     content: string;
 }
 
+export class ProjectDetail extends Project implements IProjectDetail {
+    constructor(
+        id: string, 
+        title: string,
+        category: string,
+        content: string) {
+        super(id, title, category, '');
+        this.content = content;
+    }
+    content: string;
+}
+
 export interface Photo {
     id: string;
     url: string;

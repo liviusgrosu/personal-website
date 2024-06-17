@@ -3,9 +3,9 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Button, Header, Input } from "semantic-ui-react";
+import { Button, Input, Select } from "semantic-ui-react";
 import ReactQuill from "react-quill";
-import MyTextInput from "../app/common/MyTextInput";
+import { categoryOptions } from "../app/common/options/categoryOptions";
 
 export default observer(function ProjectEdit() {
     const navigate = useNavigate();
@@ -14,6 +14,7 @@ export default observer(function ProjectEdit() {
     const {id} = useParams();
     const [reactQuillContent, setReactQuillContent] = useState('');
     const [title, setTitle] = useState('');
+    const [category, setCategory] = useState(categoryOptions[0].value);
 
     useEffect(() => {
         if (id) {
@@ -28,6 +29,7 @@ export default observer(function ProjectEdit() {
         if (selectedProjectDetails) {
             setReactQuillContent(selectedProjectDetails.content);
             setTitle(selectedProjectDetails.title);
+            setCategory(selectedProjectDetails.category);
         }
     }, [selectedProjectDetails]);
 
@@ -37,8 +39,10 @@ export default observer(function ProjectEdit() {
     };
 
     const handleSubmit = async () => {
-        await updateProjectDetails(title, reactQuillContent);
-        navigate(`/projects/${id}`);
+        if (id) {
+            await updateProjectDetails(title, category, reactQuillContent);
+            navigate(`/projects/${id}`);
+        }
     };
 
     return (
@@ -53,16 +57,19 @@ export default observer(function ProjectEdit() {
                 content="Save"
                 onClick={handleSubmit}
             />
-            {selectedProjectDetails && (
-                <>
-                    <Input
-                        defaultValue={title}
-                        name = "Title"
-                        label = "Title"
-                        onChange={(event) => setTitle(event.target.value)}
-                    />
-                </>
-            )}
+
+            <Input
+                defaultValue={title}
+                name = "Title"
+                label = "Title"
+                onChange={(event) => setTitle(event.target.value)}
+            />
+
+            <Select
+                options={categoryOptions}
+                value={category}
+                onChange={(_, data) => setCategory(data.value as string)}
+            />
 
             <ReactQuill
                 value={reactQuillContent}

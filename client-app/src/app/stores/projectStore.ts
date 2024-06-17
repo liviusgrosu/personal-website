@@ -1,12 +1,12 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
-import { Project, ProjectDetail } from "../models/project";
+import { Project, IProjectDetail } from "../models/project";
 import DOMPurify from "dompurify";
 import { store } from "./store";
 
 export default class ProjectStore {
     projects: Project[] = [];
-    selectedProjectDetails: ProjectDetail | null = null;
+    selectedProjectDetails: IProjectDetail | null = null;
 
     constructor() {
         makeAutoObservable(this);
@@ -28,17 +28,26 @@ export default class ProjectStore {
             const selectedProject = await agent.Projects.getDetails(id);
             runInAction(() => {
                 this.selectedProjectDetails = selectedProject;
-                this.selectedProjectDetails.content = DOMPurify.sanitize(selectedProject.content)
+                this.selectedProjectDetails!.content = DOMPurify.sanitize(selectedProject.content)
             })
         } catch (error) {
             console.log(error);
         }
     }
 
-    updateProjectDetails = async (title: string, content: string) => {
+    // createProjectDetails = async(title: string, content: string) =>  {
+    //     try {
+    //         let newProject = new ProjectDetail
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
+    updateProjectDetails = async (title: string, category: string, content: string) => {
         try {
             if (this.selectedProjectDetails) {
                 this.selectedProjectDetails.title = title;
+                this.selectedProjectDetails.category = category;
                 this.selectedProjectDetails.content = content;
                 await agent.Projects.updateDetails(this.selectedProjectDetails);
             }

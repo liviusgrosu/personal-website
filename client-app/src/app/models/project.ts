@@ -1,11 +1,28 @@
-export interface Project {
+export interface IProject {
     id: string;
     title: string;
     category: string;
-    image: string;
+    image?: string;
 }
 
-export interface ProjectDetail extends Project {
+export class Project implements IProject {
+    constructor(
+        id: string, 
+        title: string,
+        category: string,
+        image: string) {
+        this.id = id;
+        this.title = title;
+        this.category = category;
+        this.image = image;
+    }
+    id: string;
+    title: string;
+    category: string;
+    image?: string;
+}
+
+export interface IProjectDetail extends IProject {
     content: string;
 }
 

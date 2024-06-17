@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import {Button, Card, Icon, Image} from "semantic-ui-react";
+import {Button, Card, Image} from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
 import {Link} from "react-router-dom";
 import { Project } from "../app/models/project";

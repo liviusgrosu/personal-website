@@ -25,6 +25,7 @@ namespace Application.Blog
             public async Task<Result<List<BlogPostDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var blogs = await _context.BlogPosts
+                    .OrderByDescending(p => p.Date)
                     .ProjectTo<BlogPostDto>(_mapper.ConfigurationProvider)
                     .ToListAsync();
                 

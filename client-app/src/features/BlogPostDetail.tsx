@@ -3,8 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
 import { useEffect } from "react";
-import DOMPurify from "dompurify";
-import { Button } from "semantic-ui-react";
+import { Button, Header } from "semantic-ui-react";
 
 export default observer(function BlogPostDetail() {
     const navigate = useNavigate();
@@ -27,8 +26,6 @@ export default observer(function BlogPostDetail() {
         navigate('/blog');
     };
 
-    const sanitizedHtml = DOMPurify.sanitize(selectedBlogPostDetails);
-
     return (
         <>
         <Button 
@@ -36,7 +33,12 @@ export default observer(function BlogPostDetail() {
             content="Back"
             onClick={handleBack}
         />            
-        <div dangerouslySetInnerHTML={{__html: sanitizedHtml}}/>
+        {selectedBlogPostDetails && (
+            <>
+                <Header content={selectedBlogPostDetails.title} />
+                <div dangerouslySetInnerHTML={{__html: selectedBlogPostDetails.content}}/>
+            </>
+        )}     
         </>
     )
 })

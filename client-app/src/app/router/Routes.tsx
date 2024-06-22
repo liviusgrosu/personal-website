@@ -22,7 +22,8 @@ export const router = createBrowserRouter([
             { path: 'projects-create', element: <ProjectEdit key='create'/>},
             { path: 'blog', element: <BlogPosts/> },
             { path: 'blog/:id', element: <BlogPostDetail/> },
-            { path: 'blog-edit/:id', element: <BlogPostEdit/> },
+            { path: 'blog-edit/:id', element: <BlogPostEdit key='edit'/> },
+            { path: 'blog-create', element: <BlogPostEdit key='create'/> },
             { path: 'contact', element: <ContactPage/> },
             { path: 'login', element: <LoginForm/>},
             { path: '/', element: <Navigate to="/about" /> }

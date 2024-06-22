@@ -14,6 +14,12 @@ export default observer (function BlogPosts() {
 
     return (
         <List divided relaxed>
+            <Button 
+                icon="plus icon" 
+                content="New Blog Post"
+                as={Link}
+                to={`/blog-create`}
+            />
             {blogPosts.map(blogPost => (
                 <ListItem>
                     <ListIcon/>
@@ -22,7 +28,7 @@ export default observer (function BlogPosts() {
                             as={NavLink} 
                             to={`/blog/${blogPost.id}`}>
                                 {blogPost.title}
-                            </ListHeader>
+                        </ListHeader>
                         <ListDescription>{format(blogPost.date, 'dd MMM yyyy h:mm aa')}</ListDescription>
                         <Button 
                             basic color="blue"

@@ -60,14 +60,12 @@ export default observer(function BlogPostEdit() {
                 content="Save"
                 onClick={handleSubmit}
             />
-
             <Input
                 defaultValue={title}
                 name = "Title"
                 label = "Title"
                 onChange={(event) => setTitle(event.target.value)}
             />
-
             <DatePicker
                 selected={startDate} 
                 onChange={(date) => {setStartDate(date!); console.log(`date: ${startDate}`)}}
@@ -75,7 +73,6 @@ export default observer(function BlogPostEdit() {
                 showTimeSelect
                 dateFormat='MMMM d, yyyy h:mm aa'
             />
-
             <ReactQuill
                 value={reactQuillContent}
                 onChange={(value: string) => setReactQuillContent(value)}

@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { About } from "../models/about";
 import { Photo, Project, IProjectDetail, ProjectDetail } from "../models/project";
-import { BlogPost, BlogPostDetail } from "../models/blogPost";
+import { BlogPost, BlogPostDetail, IBlogPostDetail } from "../models/blogPost";
 import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store";
 
@@ -44,7 +44,9 @@ const Projects = {
 
 const Blogs = {
     getList:  () => requests.get<BlogPost[]>('/blogPost'),
-    getDetails: (id: string) => requests.get<BlogPostDetail>(`/blogPost/${id}`)
+    getDetails: (id: string) => requests.get<IBlogPostDetail>(`/blogPost/${id}`),
+    createDetails: (details: BlogPostDetail) => requests.post(`/blogPost`, details),
+    updateDetails: (details: IBlogPostDetail) => requests.put(`/blogPost`, details),
 }
 
 const Account = {

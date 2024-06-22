@@ -2,8 +2,9 @@
 import { useEffect } from "react";
 import { useStore } from "../app/stores/store"
 import { observer } from "mobx-react-lite";
-import { List, ListContent, ListDescription, ListHeader, ListIcon, ListItem } from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
+import { Button, List, ListContent, ListDescription, ListHeader, ListIcon, ListItem } from "semantic-ui-react";
+import { Link, NavLink } from "react-router-dom";
+import { format } from "date-fns";
 export default observer (function BlogPosts() {
     const {blogPostStore: {loadBlogPosts, blogPosts}} = useStore();
     
@@ -22,7 +23,14 @@ export default observer (function BlogPosts() {
                             to={`/blog/${blogPost.id}`}>
                                 {blogPost.title}
                             </ListHeader>
-                        <ListDescription>{blogPost.date.toString()}</ListDescription>
+                        <ListDescription>{format(blogPost.date, 'dd MMM yyyy h:mm aa')}</ListDescription>
+                        <Button 
+                            basic color="blue"
+                            as={Link}
+                            to={`/blog-edit/${blogPost.id}`}
+                        >
+                            Edit
+                        </Button>
                     </ListContent>
                 </ListItem>
             ))}

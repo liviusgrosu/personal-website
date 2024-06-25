@@ -24,8 +24,8 @@ const requests = {
 }
 
 const About = {
-    getAbout: () => requests.get<string>('/about')
-    // updateAbout: (content: string) => axios.post<>
+    getAbout: () => requests.get<string>('/about'),
+    updateAbout: (content: string) => axios.post<string>('/about', content)
 }
 
 const Projects = {

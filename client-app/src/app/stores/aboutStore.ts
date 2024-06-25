@@ -21,11 +21,11 @@ export default class AboutStore {
         }
     }
 
-    // updateAbout = async(content: string) => {
-    //     try {
-    //         await again
-    //     } catch (error) {
-            
-    //     }
-    // }
+    updateAbout = async(content: string) => {
+        try {
+            await agent.About.updateAbout(content);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }

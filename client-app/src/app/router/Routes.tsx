@@ -28,6 +28,7 @@ export const router = createBrowserRouter([
             { path: 'blog-create', element: <BlogPostEdit key='create'/> },
             { path: 'contact', element: <ContactPage/> },
             { path: 'login', element: <LoginForm/>},
+            { path: 'contact', element: <ContactPage/>},
             { path: '/', element: <Navigate to="/about" /> }
         ]
     }

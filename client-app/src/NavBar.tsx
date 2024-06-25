@@ -24,6 +24,11 @@ export default function NavBar() {
                 as={NavLink}
                 to='/blog'
             />
+            <Menu.Item
+                name='Contact'
+                as={NavLink}
+                to='/contact'
+            />
         </Menu>
     )
 }

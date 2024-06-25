@@ -14,8 +14,8 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Details.Query { }));
         }
 
-        [HttpPost]
-        public async Task<IActionResult> EditAbout(string content)
+        [HttpPut]
+        public async Task<IActionResult> EditAbout(AboutDto content)
         {
             return HandleResult(await Mediator.Send(new Edit.Command { Content = content}));
         }

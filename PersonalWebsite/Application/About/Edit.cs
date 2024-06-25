@@ -16,7 +16,7 @@ namespace Application.About
     {
         public class Command : IRequest<Result<Unit>>
         {
-            public string Content { get; set; }
+            public AboutDto Content { get; set; }
         }
 
         public class Handler : IRequestHandler<Command, Result<Unit>>
@@ -37,7 +37,7 @@ namespace Application.About
                     return null;
                 }
 
-                currentAbout.Content = request.Content;
+                currentAbout.Content = request.Content.Content;
 
                 var result = await _context.SaveChangesAsync() > 0;
 

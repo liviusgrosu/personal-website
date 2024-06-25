@@ -3,6 +3,7 @@ import { Photo, Project, IProjectDetail, ProjectDetail } from "../models/project
 import { BlogPost, BlogPostDetail, IBlogPostDetail } from "../models/blogPost";
 import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store";
+import { AboutContent } from "../models/about";
 
 axios.defaults.baseURL = 'http://localhost:7117';
 
@@ -25,7 +26,7 @@ const requests = {
 
 const About = {
     getAbout: () => requests.get<string>('/about'),
-    updateAbout: (content: string) => axios.post<string>('/about', content)
+    updateAbout: (content: AboutContent) => requests.put('/about', content)
 }
 
 const Projects = {

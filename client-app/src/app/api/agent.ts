@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from "axios";
-import { About } from "../models/about";
 import { Photo, Project, IProjectDetail, ProjectDetail } from "../models/project";
 import { BlogPost, BlogPostDetail, IBlogPostDetail } from "../models/blogPost";
 import { User, UserFormValues } from "../models/user";
@@ -25,7 +24,8 @@ const requests = {
 }
 
 const About = {
-    get: () => requests.get<About>('/about')
+    getAbout: () => requests.get<string>('/about')
+    // updateAbout: (content: string) => axios.post<>
 }
 
 const Projects = {

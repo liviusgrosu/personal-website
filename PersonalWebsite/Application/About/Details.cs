@@ -14,9 +14,9 @@ namespace Application.About
 {
     public class Details
     {
-        public class Query : IRequest<Result<AboutDto>> { }
+        public class Query : IRequest<Result<string>> { }
 
-        public class Handler : IRequestHandler<Query, Result<AboutDto>>
+        public class Handler : IRequestHandler<Query, Result<string>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -27,7 +27,7 @@ namespace Application.About
                 _mapper = mapper;
             }
 
-            public async Task<Result<AboutDto>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<string>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var aboutEntry = await _context.AboutEntry
                     .ProjectTo<AboutDto>(_mapper.ConfigurationProvider)
@@ -38,7 +38,7 @@ namespace Application.About
                     return null;
                 }
 
-                return Result<AboutDto>.Success(aboutEntry);
+                return Result<string>.Success(aboutEntry.Content);
             }
         }
     }

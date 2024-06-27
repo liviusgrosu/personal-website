@@ -6,7 +6,7 @@ import { Button, List, ListContent, ListDescription, ListHeader, ListIcon, ListI
 import { Link, NavLink } from "react-router-dom";
 import { format } from "date-fns";
 export default observer (function BlogPosts() {
-    const {blogPostStore: {loadBlogPosts, blogPosts}} = useStore();
+    const {blogPostStore: {loadBlogPosts, blogPosts}, commonStore: {token}} = useStore();
     
     useEffect(() => {
         loadBlogPosts();
@@ -14,12 +14,14 @@ export default observer (function BlogPosts() {
 
     return (
         <List divided relaxed>
-            <Button 
-                icon="plus icon" 
-                content="New Blog Post"
-                as={Link}
-                to={`/blog-create`}
-            />
+            {token && (
+                <Button 
+                    icon="plus icon" 
+                    content="New Blog Post"
+                    as={Link}
+                    to={`/blog-create`}
+                />
+            )}
             {blogPosts.map(blogPost => (
                 <ListItem>
                     <ListIcon/>
@@ -30,13 +32,15 @@ export default observer (function BlogPosts() {
                                 {blogPost.title}
                         </ListHeader>
                         <ListDescription>{format(blogPost.date, 'dd MMM yyyy h:mm aa')}</ListDescription>
-                        <Button 
-                            basic color="blue"
-                            as={Link}
-                            to={`/blog-edit/${blogPost.id}`}
-                        >
-                            Edit
-                        </Button>
+                        {token && (
+                            <Button 
+                                basic color="blue"
+                                content="Edit"
+                                as={Link}
+                                to={`/blog-edit/${blogPost.id}`}
+                            />
+                        )}
+
                     </ListContent>
                 </ListItem>
             ))}

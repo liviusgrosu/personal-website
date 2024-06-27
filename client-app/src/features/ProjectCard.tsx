@@ -11,8 +11,7 @@ interface Props {
 }
 
 export default observer(function ProfileCard({project}: Props) {
-    const {commonStore, modalStore, projectStore} = useStore();
-    const {token} = commonStore; 
+    const {commonStore: {token}, modalStore, projectStore} = useStore();
     const {uploadPhoto} = projectStore;
 
     function handlePhotoUpload(file: Blob) {
@@ -28,7 +27,7 @@ export default observer(function ProfileCard({project}: Props) {
                         <Card.Header>{project.title}</Card.Header>
                     </Card.Content>
                 </Link>
-                {token !== null && (
+                {token && (
                     <Button 
                         icon="pencil"
                         basic 
@@ -42,7 +41,7 @@ export default observer(function ProfileCard({project}: Props) {
                 )}
             </div>
 
-            {token !== null && (
+            {token && (
                 <Card.Content extra>
                     <div className="ui two buttons">
                         <Button 

@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 export default observer (function AboutPage() {
-    const {aboutStore: {loadAbout, aboutText}} = useStore();
+    const {aboutStore: {loadAbout, aboutText}, commonStore: {token}} = useStore();
     
     useEffect(() => {
         loadAbout();
@@ -13,12 +13,14 @@ export default observer (function AboutPage() {
 
     return (
         <>
-            <Button 
+            {token && (
+                <Button 
                 icon="plus icon" 
                 content="Edit About"
                 as={Link}
                 to={`/about-edit`}
-            />    
+            /> 
+            )}
             <div dangerouslySetInnerHTML={{__html: aboutText }}/>
         </>
     )

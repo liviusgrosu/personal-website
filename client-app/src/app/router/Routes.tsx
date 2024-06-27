@@ -11,6 +11,7 @@ import ProjectEdit from "../../features/ProjectEdit";
 import BlogPostEdit from "../../features/BlogPostEdit";
 import AboutEdit from "../../features/AboutEdit";
 import RequireAuth from "./RequireAuth";
+import NotFound from "../../errors/NotFound";
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -32,7 +33,9 @@ export const router = createBrowserRouter([
             { path: 'contact', element: <ContactPage/> },
             { path: 'login', element: <LoginForm/>},
             { path: 'contact', element: <ContactPage/>},
-            { path: '/', element: <Navigate to="/about" /> }
+            { path: '/', element: <Navigate to="/about" /> },
+            {path: 'not-found', element: <NotFound/>},
+            { path: '*', element: <Navigate replace to='/not-found'/>}
         ]
     }
 ])

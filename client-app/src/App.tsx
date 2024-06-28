@@ -9,7 +9,6 @@ export default observer(function App() {
   return (
     <Segment 
       inverted
-      textAlign = "center"
       vertical
     >
       <ModalContainer/>
@@ -19,7 +18,10 @@ export default observer(function App() {
         </Header>
         <NavBar/>
       </Container>
-      <Container className="content">
+      <Container 
+        className="content" 
+        style={{ marginTop: '100px' }}
+      >
           <Outlet/>
       </Container>
     </Segment>

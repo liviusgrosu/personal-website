@@ -9,26 +9,28 @@ export default function NavBar() {
             borderless
             compact
         >
-            <Menu.Item
-                name='About'
-                as={NavLink}
-                to='/about'
-            />
-            <Menu.Item
-                name='Portfolio'
-                as={NavLink}
-                to='/projects'
-            />
-            <Menu.Item
-                name='Blog Posts'
-                as={NavLink}
-                to='/blog'
-            />
-            <Menu.Item
-                name='Contact'
-                as={NavLink}
-                to='/contact'
-            />
+            <Menu.Menu position='right'>
+                <Menu.Item
+                    name='About'
+                    as={NavLink}
+                    to='/about'
+                />
+                <Menu.Item
+                    name='Portfolio'
+                    as={NavLink}
+                    to='/projects'
+                />
+                <Menu.Item
+                    name='Blog Posts'
+                    as={NavLink}
+                    to='/blog'
+                />
+                <Menu.Item
+                    name='Contact'
+                    as={NavLink}
+                    to='/contact'
+                />
+            </Menu.Menu>
         </Menu>
     )
 }

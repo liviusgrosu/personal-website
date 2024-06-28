@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import {Button, ButtonGroup, Card, CardContent, CardHeader, Icon, Image, Segment} from "semantic-ui-react";
+import {Button, ButtonGroup, Card, CardContent, CardHeader, Icon, Image} from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
 import { Project } from "../app/models/project";
 import { useStore } from "../app/stores/store";

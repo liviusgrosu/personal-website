@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useStore } from "../app/stores/store"
 import { observer } from "mobx-react-lite";
-import { Button, Card, Grid, Tab } from "semantic-ui-react";
+import { Button, CardGroup, Grid, Tab } from "semantic-ui-react";
 import ProjectCard from "./ProjectCard";
 import { Link } from "react-router-dom";
 export default observer (function ProjectsPage() {
@@ -35,13 +35,16 @@ export default observer (function ProjectsPage() {
                         content="New Portfolio"
                         as={Link}
                         to={`/projects-create`}
+                        style={{ marginBottom: '15px' }}
+                        fluid
+                        size='big'
                     />    
                 )}
-                <Card.Group itemsPerRow={3}>
+                <CardGroup itemsPerRow={3} >
                     {projects.map(project => (
                         <ProjectCard key={project.id} project={project}/>
                     ))}
-                </Card.Group>
+                </CardGroup>
             </Grid.Column>
         </Grid>
     )

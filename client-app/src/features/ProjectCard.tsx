@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import {Button, Card, Image} from "semantic-ui-react";
+import {Button, Card, CardContent, CardHeader, Image} from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
 import {Link} from "react-router-dom";
 import { Project } from "../app/models/project";
@@ -19,46 +19,43 @@ export default observer(function ProfileCard({project}: Props) {
     }
 
     return (
-        <Card>
-            <div style={{ position: 'relative' }}>
-                <Link to={`/projects/${project.id}`} style={{ display: 'block', marginBottom: '1em' }}>
-                    <Image src={project.image || '/placeholder.png'} />
-                    <Card.Content>
-                        <Card.Header>{project.title}</Card.Header>
-                    </Card.Content>
-                </Link>
-                {token && (
-                    <Button 
-                        icon="pencil"
-                        basic 
-                        color="blue" 
-                        style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1 }}
-                        onClick={(e) => {e.stopPropagation(); modalStore.openModal(
-                            <PhotoUploadWidget uploadPhoto={handlePhotoUpload}/>,
-                            'Change Cover Photo'
-                        )}}
-                    />
-                )}
-            </div>
+        <Card as={Link} to={`/projects/${project.id}`}>
+            <Image src={project.image || '/placeholder.png'} />
+            <CardContent>
+                <CardHeader textAlign='center'>{project.title}</CardHeader>
+            </CardContent>
+            {/* {token && (
+                <Button 
+                    icon="pencil"
+                    basic 
+                    color="blue" 
+                    style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1 }}
+                    onClick={(e) => {e.stopPropagation(); modalStore.openModal(
+                        <PhotoUploadWidget uploadPhoto={handlePhotoUpload}/>,
+                        'Change Cover Photo'
+                    )}}
+                />
+            )} */}
 
             {token && (
-                <Card.Content extra>
-                    <div className="ui two buttons">
+                <CardContent extra>
+                    <div className="ui three buttons">
                         <Button 
                             basic color="blue"
                             as={Link}
                             to={`/projects-edit/${project.id}`}
-                        >
-                            Edit
-                        </Button>
+                            content="Edit"
+                        />
                         <Button 
                             basic color="red"
-                            
-                        >
-                            Delete
-                        </Button>
+                            content="Delete"
+                        />
+                        <Button 
+                            basic color="green"
+                            content="Change Photo"
+                        />
                     </div>
-                </Card.Content>
+                </CardContent>
             )}
         </Card>
     );

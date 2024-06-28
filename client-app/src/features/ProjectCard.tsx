@@ -1,10 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
 import {Button, Card, CardContent, CardHeader, Image} from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
-import {Link} from "react-router-dom";
 import { Project } from "../app/models/project";
 import { useStore } from "../app/stores/store";
 import PhotoUploadWidget from "../app/imageUpload/PhotoUploadWidget";
+import { router } from "../app/router/Routes";
 
 interface Props {
     project: Project
@@ -19,32 +19,22 @@ export default observer(function ProfileCard({project}: Props) {
     }
 
     return (
-        <Card as={Link} to={`/projects/${project.id}`}>
+        <Card onClick={() => router.navigate(`/projects/${project.id}`)}>
             <Image src={project.image || '/placeholder.png'} />
             <CardContent>
                 <CardHeader textAlign='center'>{project.title}</CardHeader>
             </CardContent>
-            {/* {token && (
-                <Button 
-                    icon="pencil"
-                    basic 
-                    color="blue" 
-                    style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1 }}
-                    onClick={(e) => {e.stopPropagation(); modalStore.openModal(
-                        <PhotoUploadWidget uploadPhoto={handlePhotoUpload}/>,
-                        'Change Cover Photo'
-                    )}}
-                />
-            )} */}
 
             {token && (
                 <CardContent extra>
                     <div className="ui three buttons">
                         <Button 
                             basic color="blue"
-                            as={Link}
-                            to={`/projects-edit/${project.id}`}
                             content="Edit"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                router.navigate(`/projects-edit/${project.id}`);
+                            }}
                         />
                         <Button 
                             basic color="red"
@@ -53,6 +43,13 @@ export default observer(function ProfileCard({project}: Props) {
                         <Button 
                             basic color="green"
                             content="Change Photo"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                modalStore.openModal(
+                                    <PhotoUploadWidget uploadPhoto={handlePhotoUpload}/>,
+                                    'Change Cover Photo'
+                                );
+                            }}
                         />
                     </div>
                 </CardContent>

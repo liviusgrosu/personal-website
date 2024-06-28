@@ -17,13 +17,15 @@ export default function ContactPage() {
       return (
         <>
             <Button 
-                icon="linkedin square icon"
+                icon="linkedin"
+                color='linkedin'
                 href="https://www.linkedin.com/in/liviusgrosu/"
                 target='_blank'
                 content="Linkdin"
             />
             <Button 
-                icon="github icon" 
+                icon="github" 
+                color='black'
                 href="https://github.com/liviusgrosu"
                 target='_blank'
                 content="Github"

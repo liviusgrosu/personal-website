@@ -4,8 +4,8 @@ body {
 
 @media only screen and (min-width: 768px) {
   .ui.container {
-    width: 700px;
-    max-width: 700px;
+    width: 700px !important;
+    max-width: 700px !important;
   }
 
   nav.ui.container .ui.header {
@@ -47,16 +47,12 @@ nav.ui.container .ui.inverted.compact.menu .active.item{
   border-bottom-width: 2px;
 }
 
-/* .custom-tab-menu .item {
+.ui.secondary.pointing.menu .item {
   color: white !important;
 }
 
-.custom-tab-menu .secondary.pointing.menu .item:before {
-  border-bottom: white !important;
-} */
-
-.ui.secondary.pointing.menu .item {
-  color: white !important;
+.ui.items > .item > .content > a.header {
+	color: white !important;
 }
 
 .ui.secondary.pointing.menu {
@@ -67,39 +63,22 @@ nav.ui.container .ui.inverted.compact.menu .active.item{
 	border-color: #b3b3b3 !important;
 }
 
+.ui.form .field > label {
+	color:  white !important;
+}
+
+.ui.header {
+	color:  white !important;
+}
+
+.ui.items > .item .meta {
+	color: #dfdfdf !important;
+}
+
+.ui.items > .item > .content > .description {
+	color: #b3b3b3 !important;
+}
+
 .ui.inverted.vertical.segment {
   background-color: rgb(51, 51, 51);
 }
-
-/* .ui.content.container {
-  height: 300px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-} */
-
-/* .ui.content.container h1.header {
-  font-size: 36px;
-} */
-
-/* .ui.content.container p {
-  font-size: 21px;
-  line-height: 1.6;
-  font-weight: 300;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-} */
-
-/* .ui.inverted.vertical.segment footer.ui.segment {
-  height: 80px;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  color: gray;
-} */
-
-/* .ui.inverted.vertical.segment footer.ui.segment a {
-  color: white;
-} */

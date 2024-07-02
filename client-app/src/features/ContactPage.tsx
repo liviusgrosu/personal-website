@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form, FormInput, FormTextArea, Header, Input } from "semantic-ui-react";
+import { Button, Divider, Form, FormInput, FormTextArea, Header, Icon, Input } from "semantic-ui-react";
 
 export default function ContactPage() {
     
@@ -16,6 +16,13 @@ export default function ContactPage() {
     
       return (
         <>
+            <Divider horizontal>
+                <Header as='h4'>
+                    Socials
+                </Header>
+            </Divider>
+            <Divider hidden />
+
             <Button 
                 icon="linkedin"
                 color='linkedin'
@@ -30,27 +37,34 @@ export default function ContactPage() {
                 target='_blank'
                 content="Github"
             />
+            <Divider hidden />
+            <Divider horizontal>
+                <Header as='h4'>
+                    Email Me
+                </Header>
+            </Divider>
+            <Divider hidden />
             <Form onSubmit={handleSubmit}>
-            <FormInput
-                label='Name'
-                name='name'
-                value={formData.name}
-                placeholder='Enter your name'
-            />
-            <FormInput
-                label='Email'
-                name='email'
-                value={formData.email}
-                placeholder='Enter your email'
-                type='email'
-            />
-            <FormTextArea
-                label='Body'
-                name='body'
-                value={formData.body}
-                placeholder='Enter the message body'
-            />
-            <Button type='submit' primary>Submit</Button>
+                <FormInput
+                    label='Name'
+                    name='name'
+                    value={formData.name}
+                    placeholder='Enter your name'
+                />
+                <FormInput
+                    label='Email'
+                    name='email'
+                    value={formData.email}
+                    placeholder='Enter your email'
+                    type='email'
+                />
+                <FormTextArea
+                    label='Body'
+                    name='body'
+                    value={formData.body}
+                    placeholder='Enter the message body'
+                />
+                <Button type='submit' primary>Submit</Button>
             </Form>
         </>
       );

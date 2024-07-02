@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useStore } from "../app/stores/store"
 import { observer } from "mobx-react-lite";
-import { Button, List, ListContent, ListDescription, ListHeader, ListIcon, ListItem } from "semantic-ui-react";
+import { Button, Item, ItemContent, ItemDescription, ItemGroup, ItemHeader, ItemImage, ItemMeta } from "semantic-ui-react";
 import { Link, NavLink } from "react-router-dom";
 import { format } from "date-fns";
 export default observer (function BlogPosts() {
@@ -13,7 +13,7 @@ export default observer (function BlogPosts() {
     }, [loadBlogPosts])
 
     return (
-        <List divided relaxed>
+        <>            
             {token && (
                 <Button 
                     icon="plus icon" 
@@ -23,27 +23,25 @@ export default observer (function BlogPosts() {
                 />
             )}
             {blogPosts.map(blogPost => (
-                <ListItem>
-                    <ListIcon/>
-                    <ListContent>
-                        <ListHeader 
-                            as={NavLink} 
-                            to={`/blog/${blogPost.id}`}>
-                                {blogPost.title}
-                        </ListHeader>
-                        <ListDescription>{format(blogPost.date, 'dd MMM yyyy h:mm aa')}</ListDescription>
-                        {token && (
-                            <Button 
-                                basic color="blue"
-                                content="Edit"
-                                as={Link}
-                                to={`/blog-edit/${blogPost.id}`}
+                <ItemGroup>
+                    <Item>
+                        <ItemImage size='small' src='/placeholder.png' />
+                        <ItemContent>
+                            <ItemHeader 
+                                as={NavLink} 
+                                to={`/blog/${blogPost.id}`}
+                                content={blogPost.title}
                             />
-                        )}
-
-                    </ListContent>
-                </ListItem>
+                            <ItemMeta 
+                                content={format(blogPost.date, 'dd MMM yyyy h:mm aa')}
+                            />
+                            <ItemDescription
+                                content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nec sagittis aliquam malesuada bibendum arcu. Nec sagittis aliquam malesuada bibendum. Magna ac placerat vestibulum lectus mauris ultrices eros in"   
+                            />
+                        </ItemContent>
+                    </Item>
+                </ItemGroup>
             ))}
-        </List>
+        </>
     )
 })

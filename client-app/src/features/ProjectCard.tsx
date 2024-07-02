@@ -49,7 +49,19 @@ export default observer(function ProfileCard({project}: Props) {
                         >
                             <Icon name='picture' />
                         </Button>
-                        <Button negative icon>
+                        <Button 
+                            negative 
+                            icon
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                modalStore.openModal(
+                                    <>
+
+                                    </>,
+                                    'Delete Project'
+                                );
+                            }}
+                        >
                             <Icon name='trash' />
                         </Button>    
                     </ButtonGroup>

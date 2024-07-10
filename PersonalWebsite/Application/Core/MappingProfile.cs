@@ -14,7 +14,8 @@ namespace Application.Core
             CreateMap<BlogPost, BlogPost>();
             CreateMap<BlogPost, BlogPostDto>();
             CreateMap<Project, Project>();
-            CreateMap<Project, ProjectDto>();
+            CreateMap<Project, ProjectDto>()
+                .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.Tags.ToList()));
         }
     }
 }

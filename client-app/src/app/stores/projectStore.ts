@@ -53,6 +53,15 @@ export default class ProjectStore {
         }
     }
 
+    deleteProject = async (id: string) => {
+        try {
+            await agent.Projects.delete(id);
+            this.projects = this.projects.filter(project => project.id !== id);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     updateProjectDetails = async (title: string, category: string, content: string) => {
         try {
             if (this.selectedProjectDetails) {

@@ -5,6 +5,7 @@ import { useParams, useNavigate  } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button, ButtonGroup, Header } from "semantic-ui-react";
 import PhotoUploadWidget from "../app/imageUpload/PhotoUploadWidget";
+import ProjectDelete from "./ProjectDelete";
 
 export default observer(function ProjectDetail() {
     const navigate = useNavigate();
@@ -60,7 +61,11 @@ export default observer(function ProjectDetail() {
                         icon="trash" 
                         content="Delete"
                         color='red'
-                        onClick={handleBack}
+                        onClick={() => {
+                            modalStore.openModal(
+                                <ProjectDelete/>,
+                            );
+                        }}
                     />
                 </ButtonGroup>
             )}

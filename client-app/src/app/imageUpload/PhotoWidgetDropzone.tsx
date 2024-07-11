@@ -16,11 +16,11 @@ export default function PhotoWidgetDropzone({setFiles}: Props) {
 
     return (
         <Segment placeholder className={`dropzone-segment ${isDragActive ? 'active' : ''}`}>
-            <div {...getRootProps()}>
+            <div {...getRootProps()} className='centre-div'>
                 <input {...getInputProps()} />
                 <Header icon>
                     <Icon name='upload'/>
-                        Click or Drop image here
+                        Click to add or drop image here
                 </Header>
             </div>
         </Segment>

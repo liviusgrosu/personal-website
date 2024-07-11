@@ -95,12 +95,26 @@ nav.ui.container .ui.inverted.compact.menu .active.item{
 	background: rgb(51, 51, 51) !important;
 }
 
+.ui.modal > .actions {
+	background: rgb(51, 51, 51) !important;
+}
+
 .dropzone-segment {
 	background: #979797 !important;
 	border-color: rgba(34,36,38,.15) !important;
 	box-shadow: 0 2px 25px 0 rgba(34,36,38,0.5) inset !important;
 }
 
+.centre-div {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
 .dropzone-segment.active {
   background: #636363 !important;
+}
+
+.modal-header {
+	color: #dfdfdf !important;
 }

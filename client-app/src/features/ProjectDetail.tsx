@@ -2,7 +2,7 @@
 import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button, ButtonGroup, Header } from "semantic-ui-react";
 import PhotoUploadWidget from "../app/imageUpload/PhotoUploadWidget";
 
@@ -53,7 +53,6 @@ export default observer(function ProjectDetail() {
                         onClick={() => {
                             modalStore.openModal(
                                 <PhotoUploadWidget uploadPhoto={handlePhotoUpload}/>,
-                                'Change Cover Photo'
                             );
                         }}
                     />

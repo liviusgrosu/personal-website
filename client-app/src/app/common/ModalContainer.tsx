@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { Header, Modal } from "semantic-ui-react";
+import { Modal } from "semantic-ui-react";
 import { useStore } from "../stores/store";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -12,12 +12,7 @@ export default observer ( function ModalContainer() {
             size="tiny"
             closeIcon
         >
-            {modalStore.modal.header !== '' && (
-                <Header content={modalStore.modal.header} />
-            )}
-            <Modal.Content>
-                {modalStore.modal.body}
-            </Modal.Content>
+            {modalStore.modal.content}
         </Modal>
     )
 })

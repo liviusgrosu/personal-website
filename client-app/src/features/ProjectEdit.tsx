@@ -33,11 +33,6 @@ export default observer(function ProjectEdit() {
         }
     }, [selectedProjectDetails]);
 
-    const handleBack = () => {
-        clearSelectedProjectDetails();
-        navigate('/projects');
-    };
-
     const handleSubmit = async () => {
         if (id) {
             await updateProjectDetails(title, category, reactQuillContent);
@@ -51,12 +46,12 @@ export default observer(function ProjectEdit() {
     return (
         <>
             <Button 
-                icon="left arrow icon" 
-                content="Back"
-                onClick={handleBack}
+                icon="cancel" 
+                content="Cancel"
+                onClick={() => {navigate(`/projects/${id}`)}}
             />
             <Button 
-                icon="save icon" 
+                icon="save" 
                 content="Save"
                 onClick={handleSubmit}
             />

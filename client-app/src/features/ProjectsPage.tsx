@@ -32,7 +32,7 @@ export default observer (function ProjectsPage() {
                 {token && (
                     <Button 
                         icon="plus icon" 
-                        content="New Portfolio"
+                        content="New Project Page"
                         as={Link}
                         to={`/projects-create`}
                         style={{ marginBottom: '15px' }}

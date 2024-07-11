@@ -3,12 +3,13 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
 import { useEffect } from "react";
-import { Button, Header } from "semantic-ui-react";
+import { Button, ButtonGroup, Header } from "semantic-ui-react";
+import PhotoUploadWidget from "../app/imageUpload/PhotoUploadWidget";
 
 export default observer(function ProjectDetail() {
     const navigate = useNavigate();
-    const {projectStore} = useStore();
-    const {selectedProjectDetails, loadProjectDetails, clearSelectedProjectDetails} = projectStore;
+    const {projectStore, modalStore, commonStore: {token}} = useStore();
+    const {selectedProjectDetails, loadProjectDetails, clearSelectedProjectDetails, uploadPhoto} = projectStore;
 
     const {id} = useParams();
 
@@ -26,14 +27,45 @@ export default observer(function ProjectDetail() {
         navigate('/projects');
     };
 
+    function handlePhotoUpload(file: Blob) {
+        uploadPhoto(id!.toString(), file);
+        modalStore.closeModal();
+        navigate('/projects');
+    }
+
     return (
         <>
-        <Button 
-            icon="left arrow icon" 
-            content="Back"
-            circular
-            onClick={handleBack}
-        />
+            <Button 
+                icon="left arrow" 
+                content="Back"
+                onClick={handleBack}
+            />
+            {token && (
+                <ButtonGroup>
+                    <Button 
+                        icon="edit" 
+                        content="Edit"
+                        onClick={() => {navigate(`/projects-edit/${id}`)}}
+                    />
+                    <Button 
+                        icon="photo" 
+                        content="Photo"
+                        onClick={() => {
+                            modalStore.openModal(
+                                <PhotoUploadWidget uploadPhoto={handlePhotoUpload}/>,
+                                'Change Cover Photo'
+                            );
+                        }}
+                    />
+                    <Button 
+                        icon="trash" 
+                        content="Delete"
+                        color='red'
+                        onClick={handleBack}
+                    />
+                </ButtonGroup>
+            )}
+        
             {selectedProjectDetails && (
                 <>
                     <Header content={selectedProjectDetails.title} />

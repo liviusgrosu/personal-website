@@ -41,9 +41,11 @@ export default class ProjectStore {
             await agent.Projects.createDetails(
                 new ProjectDetail(
                     uuid(), 
-                    title, 
+                    title,
+                    "",
                     category, 
-                    content
+                    content,
+                    []
                 )
             );
         } catch (error) {

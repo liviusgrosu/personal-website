@@ -79,6 +79,10 @@ nav.ui.container .ui.inverted.compact.menu .active.item{
 	color: #b3b3b3 !important;
 }
 
+.ui.items > .item > .content > .header {
+	color: #dfdfdf !important;
+}
+
 .ui.inverted.vertical.segment {
   background-color: rgb(51, 51, 51);
 }

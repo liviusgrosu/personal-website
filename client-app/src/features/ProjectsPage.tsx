@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useStore } from "../app/stores/store"
 import { observer } from "mobx-react-lite";
-import { Button, CardGroup, Grid, Item, ItemContent, ItemDescription, ItemExtra, ItemGroup, ItemHeader, ItemImage, Label, LabelGroup, Tab } from "semantic-ui-react";
+import { Button, Grid, ItemGroup, Tab } from "semantic-ui-react";
 import ProjectCard from "./ProjectCard";
 import { Link } from "react-router-dom";
 export default observer (function ProjectsPage() {
@@ -37,10 +37,10 @@ export default observer (function ProjectsPage() {
                         to={`/projects-create`}
                         style={{ marginBottom: '15px' }}
                         fluid
-                        size='big'
+                        primary
                     />    
                 )}
-                <ItemGroup>
+                <ItemGroup relaxed>
                     {projects.map(project => (
                         <ProjectCard key={project.id} project={project}/>
                     ))}

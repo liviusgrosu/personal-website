@@ -31,6 +31,7 @@ export default observer(function ProjectDetail() {
         <Button 
             icon="left arrow icon" 
             content="Back"
+            circular
             onClick={handleBack}
         />
             {selectedProjectDetails && (

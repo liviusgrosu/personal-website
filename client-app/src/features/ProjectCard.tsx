@@ -20,20 +20,20 @@ export default observer(function ProfileCard({project}: Props) {
     }
 
     return (
-        <Item as={Link} to={`/projects/${project.id}`}>
-            <ItemImage src={project.image || '/placeholder.png'} />
-            <ItemContent>
-                <ItemHeader content={project.title}/>
-                <ItemDescription content={project.description}/>
-                <ItemExtra>
-                    <LabelGroup size='small'>
-                        {project.tags.map(tag => (
-                            <Label content={tag}/>
-                        ))}
-                    </LabelGroup>
-                </ItemExtra>
-            </ItemContent>
-        </Item>
+            <Item as={Link} to={`/projects/${project.id}`}>
+                <ItemImage src={project.image || '/placeholder.png'} />
+                <ItemContent>
+                    <ItemHeader content={project.title}></ItemHeader>
+                    <ItemDescription content={project.description}/>
+                    <ItemExtra>
+                        <LabelGroup size='small'>
+                            {project.tags.map(tag => (
+                                <Label content={tag}/>
+                            ))}
+                        </LabelGroup>
+                    </ItemExtra>
+                </ItemContent>
+            </Item>
         
         // <Card onClick={() => router.navigate(`/projects/${project.id}`)}>
         //     <Image src={project.image || '/placeholder.png'} />

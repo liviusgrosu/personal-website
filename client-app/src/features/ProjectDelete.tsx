@@ -22,7 +22,8 @@ export default function ProjectDelete() {
                 Delete Portfolio
             </ModalHeader>
             <ModalContent className="modal-header">
-                Are you sure you want to delete this portfolio page? This is a irreversable action
+                Are you sure you want to delete this portfolio page? 
+                This is a irreversable action
             </ModalContent>
             <ModalActions>
                 <Button onClick={handleDelete} content="Delete" negative icon='trash'/>

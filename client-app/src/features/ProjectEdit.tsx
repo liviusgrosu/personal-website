@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Button, Input, Select } from "semantic-ui-react";
+import { Button, Dropdown, DropdownItemProps, DropdownProps, Icon, Input, Label, Select } from "semantic-ui-react";
 import ReactQuill from "react-quill";
 import { categoryOptions } from "../app/common/options/categoryOptions";
 
@@ -15,6 +15,7 @@ export default observer(function ProjectEdit() {
     const [reactQuillContent, setReactQuillContent] = useState('');
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState(categoryOptions[0].value);
+    const [tags, setTags] = useState<string[]>([]);
 
     useEffect(() => {
         if (id) {
@@ -30,17 +31,35 @@ export default observer(function ProjectEdit() {
             setReactQuillContent(selectedProjectDetails.content);
             setTitle(selectedProjectDetails.title);
             setCategory(selectedProjectDetails.category);
+            setTags(selectedProjectDetails.tags);
         }
     }, [selectedProjectDetails]);
 
     const handleSubmit = async () => {
         if (id) {
-            await updateProjectDetails(title, category, reactQuillContent);
+            await updateProjectDetails(title, category, reactQuillContent, tags);
             navigate(`/projects/${id}`);
         } else {
-            await createProjectDetails(title, category, reactQuillContent);
+            await createProjectDetails(title, category, reactQuillContent, tags);
             navigate(`/projects`);
         }
+    };
+
+    const [inputValue, setInputValue] = useState<string>('');
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && inputValue.trim()) {
+            e.preventDefault();
+            // Add the new tag to the local state
+            if (!tags.includes(inputValue.trim())) {
+                setTags([...tags, inputValue.trim()]);
+            }
+            setInputValue('');
+        }
+    };
+
+    const handleRemoveTag = (tag: string) => {
+        setTags(tags.filter(t => t !== tag));
     };
 
     return (
@@ -68,6 +87,22 @@ export default observer(function ProjectEdit() {
                 value={category}
                 onChange={(_, data) => setCategory(data.value as string)}
             />
+
+            <Input
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder='Type a tag and press enter'
+            />
+
+            <div>
+                {tags.map(tag => (
+                    <Label key={tag} style={{ margin: '5px' }}>
+                        {tag}
+                        <Icon name='delete' onClick={() => handleRemoveTag(tag)} />
+                    </Label>
+                ))}
+            </div>
 
             <ReactQuill
                 value={reactQuillContent}

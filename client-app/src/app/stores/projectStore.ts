@@ -36,7 +36,7 @@ export default class ProjectStore {
         }
     }
 
-    createProjectDetails = async(title: string, category: string, content: string) =>  {
+    createProjectDetails = async(title: string, category: string, content: string, tags: string[]) =>  {
         try {
             await agent.Projects.createDetails(
                 new ProjectDetail(
@@ -45,7 +45,7 @@ export default class ProjectStore {
                     "",
                     category, 
                     content,
-                    []
+                    tags
                 )
             );
         } catch (error) {
@@ -62,12 +62,13 @@ export default class ProjectStore {
         }
     }
 
-    updateProjectDetails = async (title: string, category: string, content: string) => {
+    updateProjectDetails = async (title: string, category: string, content: string, tags: string[]) => {
         try {
             if (this.selectedProjectDetails) {
                 this.selectedProjectDetails.title = title;
                 this.selectedProjectDetails.category = category;
                 this.selectedProjectDetails.content = content;
+                this.selectedProjectDetails.tags = tags;
                 await agent.Projects.updateDetails(this.selectedProjectDetails);
             }
         } catch (error) {

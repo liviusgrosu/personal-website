@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Button, Icon, Input, Label, Select, TextArea, TextAreaProps } from "semantic-ui-react";
+import { Button, Form, GridColumn, FormField, Header, Icon, Input, Label, Select, TextArea, TextAreaProps, FormGroup } from "semantic-ui-react";
 import ReactQuill from "react-quill";
 import { categoryOptions } from "../app/common/options/categoryOptions";
 
@@ -68,67 +68,83 @@ export default observer(function ProjectEdit() {
     };
 
     return (
-        <>
-            <Button 
-                icon="cancel" 
-                content="Cancel"
-                onClick={() => {navigate(`/projects/${id}`)}}
-            />
-            <Button 
-                icon="save" 
-                content="Save"
-                onClick={handleSubmit}
-            />
+        <Form>
+            <FormField>
+                <Button 
+                    icon="cancel" 
+                    content="Cancel"
+                    onClick={() => {navigate(`/projects/${id}`)}}
+                />
+                <Button 
+                    icon="save" 
+                    content="Save"
+                    primary
+                    onClick={handleSubmit}
+                />
+            </FormField>
+            <FormField>
+                <Header content="Title"/>
+                <Input
+                    defaultValue={title}
+                    name = "Title"
+                    fluid
+                    onChange={(event) => setTitle(event.target.value)}
+                />
+            </FormField>
+            <FormField>
+                <Header content="Description"/>
+                <TextArea
+                    placeholder='Enter project description' 
+                    value={description}
+                    onChange={handleDescriptionChange}
+                />
+            </FormField>
 
-            <Input
-                defaultValue={title}
-                name = "Title"
-                label = "Title"
-                onChange={(event) => setTitle(event.target.value)}
-            />
+            <FormGroup widths='equal'>
+                <FormField>
+                    <Header content="Category"/>
+                    <Select
+                        options={categoryOptions}
+                        value={category}
+                        onChange={(_, data) => setCategory(data.value as string)}
+                    />
+                </FormField>
+                <FormField>
+                    <Header content="Tags"/>
+                    <Input
+                        value={inputTagValue}
+                        onChange={(e) => setInputTagValue(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        placeholder='Type a tag and press enter'
+                    />
+                    <div>
+                        {tags.map(tag => (
+                            <Label key={tag} style={{ margin: '5px' }}>
+                                {tag}
+                                <Icon name='delete' onClick={() => handleRemoveTag(tag)} />
+                            </Label>
+                        ))}
+                    </div>
+                </FormField>
+            </FormGroup>
+            <FormField>
+                <Header content="Content"/>
+                <ReactQuill
+                    value={reactQuillContent}
+                    onChange={(value: string) => setReactQuillContent(value)}
+                    modules={{
+                        toolbar: [
+                            [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+                            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                            [{ 'align': [] }],
+                            ['link', 'image'],
+                            ['clean']
+                        ]
+                    }}
+                />
+            </FormField>
 
-            <Select
-                options={categoryOptions}
-                value={category}
-                onChange={(_, data) => setCategory(data.value as string)}
-            />
-
-            <TextArea
-                placeholder='Enter project description' 
-                value={description}
-                onChange={handleDescriptionChange}
-            />
-
-            <Input
-                value={inputTagValue}
-                onChange={(e) => setInputTagValue(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder='Type a tag and press enter'
-            />
-
-            <div>
-                {tags.map(tag => (
-                    <Label key={tag} style={{ margin: '5px' }}>
-                        {tag}
-                        <Icon name='delete' onClick={() => handleRemoveTag(tag)} />
-                    </Label>
-                ))}
-            </div>
-
-            <ReactQuill
-                value={reactQuillContent}
-                onChange={(value: string) => setReactQuillContent(value)}
-                modules={{
-                toolbar: [
-                    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                    [{ 'align': [] }],
-                    ['link', 'image'],
-                    ['clean']
-                ]
-                }}
-            />        
-        </>
+        </Form>
     )
 })

@@ -118,3 +118,15 @@ nav.ui.container .ui.inverted.compact.menu .active.item{
 .modal-header {
 	color: #dfdfdf !important;
 }
+
+.ql-toolbar .ql-stroke {
+  stroke: #fff !important;
+}
+
+.ql-toolbar .ql-fill {
+  fill: #fff !important;
+}
+
+.ql-toolbar .ql-picker {
+  color: #fff !important;
+}

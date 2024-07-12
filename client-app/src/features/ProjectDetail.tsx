@@ -2,8 +2,8 @@
 import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Button, ButtonGroup, Header } from "semantic-ui-react";
+import { useEffect } from "react";
+import { Button, ButtonGroup, Header, Label } from "semantic-ui-react";
 import PhotoUploadWidget from "../app/imageUpload/PhotoUploadWidget";
 import ProjectDelete from "./ProjectDelete";
 
@@ -69,10 +69,14 @@ export default observer(function ProjectDetail() {
                     />
                 </ButtonGroup>
             )}
-        
             {selectedProjectDetails && (
                 <>
                     <Header content={selectedProjectDetails.title} />
+                    <div>
+                        {selectedProjectDetails?.tags.map(tag => (
+                            <Label content={tag} key={tag} style={{ margin: '5px' }}/>
+                        ))}
+                    </div>
                     <div dangerouslySetInnerHTML={{__html: selectedProjectDetails.content}}/>
                 </>
             )}            

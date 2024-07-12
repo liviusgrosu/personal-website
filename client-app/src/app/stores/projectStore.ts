@@ -36,13 +36,13 @@ export default class ProjectStore {
         }
     }
 
-    createProjectDetails = async(title: string, category: string, content: string, tags: string[]) =>  {
+    createProjectDetails = async(title: string, description: string, category: string, content: string, tags: string[]) =>  {
         try {
             await agent.Projects.createDetails(
                 new ProjectDetail(
                     uuid(), 
                     title,
-                    "",
+                    description,
                     category, 
                     content,
                     tags
@@ -62,10 +62,11 @@ export default class ProjectStore {
         }
     }
 
-    updateProjectDetails = async (title: string, category: string, content: string, tags: string[]) => {
+    updateProjectDetails = async (title: string, description: string, category: string, content: string, tags: string[]) => {
         try {
             if (this.selectedProjectDetails) {
                 this.selectedProjectDetails.title = title;
+                this.selectedProjectDetails.description = description;
                 this.selectedProjectDetails.category = category;
                 this.selectedProjectDetails.content = content;
                 this.selectedProjectDetails.tags = tags;

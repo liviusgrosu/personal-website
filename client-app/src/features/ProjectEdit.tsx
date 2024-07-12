@@ -2,8 +2,8 @@
 import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Button, Dropdown, DropdownItemProps, DropdownProps, Icon, Input, Label, Select } from "semantic-ui-react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Button, Icon, Input, Label, Select, TextArea, TextAreaProps } from "semantic-ui-react";
 import ReactQuill from "react-quill";
 import { categoryOptions } from "../app/common/options/categoryOptions";
 
@@ -14,8 +14,10 @@ export default observer(function ProjectEdit() {
     const {id} = useParams();
     const [reactQuillContent, setReactQuillContent] = useState('');
     const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [category, setCategory] = useState(categoryOptions[0].value);
     const [tags, setTags] = useState<string[]>([]);
+    const [inputTagValue, setInputTagValue] = useState<string>('');
 
     useEffect(() => {
         if (id) {
@@ -30,6 +32,7 @@ export default observer(function ProjectEdit() {
         if (selectedProjectDetails) {
             setReactQuillContent(selectedProjectDetails.content);
             setTitle(selectedProjectDetails.title);
+            setDescription(selectedProjectDetails.description);
             setCategory(selectedProjectDetails.category);
             setTags(selectedProjectDetails.tags);
         }
@@ -37,29 +40,31 @@ export default observer(function ProjectEdit() {
 
     const handleSubmit = async () => {
         if (id) {
-            await updateProjectDetails(title, category, reactQuillContent, tags);
+            await updateProjectDetails(title, description, category, reactQuillContent, tags);
             navigate(`/projects/${id}`);
         } else {
-            await createProjectDetails(title, category, reactQuillContent, tags);
+            await createProjectDetails(title, description, category, reactQuillContent, tags);
             navigate(`/projects`);
         }
     };
 
-    const [inputValue, setInputValue] = useState<string>('');
-
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && inputValue.trim()) {
+        if (e.key === 'Enter' && inputTagValue.trim()) {
             e.preventDefault();
             // Add the new tag to the local state
-            if (!tags.includes(inputValue.trim())) {
-                setTags([...tags, inputValue.trim()]);
+            if (!tags.includes(inputTagValue.trim())) {
+                setTags([...tags, inputTagValue.trim()]);
             }
-            setInputValue('');
+            setInputTagValue('');
         }
     };
 
     const handleRemoveTag = (tag: string) => {
         setTags(tags.filter(t => t !== tag));
+    };
+
+    const handleDescriptionChange = (_: ChangeEvent<HTMLTextAreaElement>, data: TextAreaProps) => {
+        setDescription(data.value as string);
     };
 
     return (
@@ -88,9 +93,15 @@ export default observer(function ProjectEdit() {
                 onChange={(_, data) => setCategory(data.value as string)}
             />
 
+            <TextArea
+                placeholder='Enter project description' 
+                value={description}
+                onChange={handleDescriptionChange}
+            />
+
             <Input
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
+                value={inputTagValue}
+                onChange={(e) => setInputTagValue(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder='Type a tag and press enter'
             />

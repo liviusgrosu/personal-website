@@ -120,13 +120,22 @@ nav.ui.container .ui.inverted.compact.menu .active.item{
 }
 
 .ql-toolbar .ql-stroke {
+  fill: none !important;
   stroke: #fff !important;
 }
 
 .ql-toolbar .ql-fill {
   fill: #fff !important;
+  stroke: none !important;
 }
 
 .ql-toolbar .ql-picker {
   color: #fff !important;
+}
+
+.customDatePickerWidth, 
+.customDatePickerWidth > div.react-datepicker-wrapper, 
+.customDatePickerWidth > div > div.react-datepicker__input-container
+.customDatePickerWidth > div > div.react-datepicker__input-container input {
+   width: 100%;
 }

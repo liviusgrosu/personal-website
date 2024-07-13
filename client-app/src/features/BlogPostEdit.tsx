@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Button, Input } from "semantic-ui-react";
+import { Button, Form, FormField, FormGroup, Header, Input } from "semantic-ui-react";
 import ReactQuill from "react-quill";
 import DatePicker from "react-datepicker";
 
@@ -33,11 +33,6 @@ export default observer(function BlogPostEdit() {
         }
     }, [selectedBlogPostDetails]);
 
-    const handleBack = () => {
-        clearSelectedBlogPostDetails();
-        navigate('/blog');
-    };
-
     const handleSubmit = async () => {
         if (id) {
             await updateBlogPostDetails(title, startDate, reactQuillContent);
@@ -49,44 +44,60 @@ export default observer(function BlogPostEdit() {
     };
 
     return (
-        <>
-            <Button 
-                icon="left arrow icon" 
-                content="Back"
-                onClick={handleBack}
-            />
-            <Button 
-                icon="save icon" 
-                content="Save"
-                onClick={handleSubmit}
-            />
-            <Input
-                defaultValue={title}
-                name = "Title"
-                label = "Title"
-                onChange={(event) => setTitle(event.target.value)}
-            />
-            <DatePicker
-                selected={startDate} 
-                onChange={(date) => {setStartDate(date!); console.log(`date: ${startDate}`)}}
-                showIcon
-                showTimeSelect
-                dateFormat='MMMM d, yyyy h:mm aa'
-            />
-            <ReactQuill
-                value={reactQuillContent}
-                onChange={(value: string) => setReactQuillContent(value)}
-                modules={{
-                toolbar: [
-                    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                    [{ 'align': [] }],
-                    ['link', 'image'],
-                    ['clean']
-                ]
-                }}
-            />        
-        </>
+        <Form>
+            <FormField>
+                <Button 
+                    icon="cancel" 
+                    content="Cancel"
+                    onClick={() => {navigate(`/blog/${id}`)}}
+                />
+                <Button 
+                    icon="save" 
+                    content="Save"
+                    primary
+                    onClick={handleSubmit}
+                />
+            </FormField>
+            <FormGroup>
+                <FormField width={10}>
+                    <Header content="Title"/>
+                    <Input
+                        defaultValue={title}
+                        name = "Title"
+                        fluid
+                        onChange={(event) => setTitle(event.target.value)}
+                    />
+                </FormField>
+                <FormField width={6}>
+                    <Header content="Date"/>
+                    <div className="customDatePickerWidth">
+                        <DatePicker
+                            selected={startDate} 
+                            onChange={(date) => {setStartDate(date!); console.log(`date: ${startDate}`)}}
+                            showTimeSelect
+                            dateFormat='MMMM d, yyyy h:mm aa'
+                        />
+                    </div>
+                </FormField>
+            </FormGroup>
+
+            <FormField>
+                <Header content="Content"/>
+                <ReactQuill
+                    value={reactQuillContent}
+                    onChange={(value: string) => setReactQuillContent(value)}
+                    modules={{
+                    toolbar: [
+                        [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                        [{ 'align': [] }],
+                        ['link', 'image'],
+                        ['clean']
+                    ]
+                    }}
+                /> 
+            </FormField>
+        </Form>
     )
 })

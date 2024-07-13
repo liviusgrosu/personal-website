@@ -1,5 +1,4 @@
-import { Button, Grid, Header, ModalActions, ModalContent, ModalHeader } from "semantic-ui-react";
-import { useEffect, useState } from "react";
+import { Button, ModalActions, ModalContent, ModalHeader } from "semantic-ui-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useStore } from "../app/stores/store";
  

@@ -82,15 +82,25 @@ export default observer(function ProjectEdit() {
                     onClick={handleSubmit}
                 />
             </FormField>
-            <FormField>
-                <Header content="Title"/>
-                <Input
-                    defaultValue={title}
-                    name = "Title"
-                    fluid
-                    onChange={(event) => setTitle(event.target.value)}
-                />
-            </FormField>
+            <FormGroup>
+                <FormField width={10}>
+                    <Header content="Title"/>
+                    <Input
+                        defaultValue={title}
+                        name = "Title"
+                        fluid
+                        onChange={(event) => setTitle(event.target.value)}
+                    />
+                </FormField>
+                <FormField width={6}>
+                    <Header content="Category"/>
+                    <Select
+                        options={categoryOptions}
+                        value={category}
+                        onChange={(_, data) => setCategory(data.value as string)}
+                    />
+                </FormField>
+            </FormGroup>
             <FormField>
                 <Header content="Description"/>
                 <TextArea
@@ -100,33 +110,24 @@ export default observer(function ProjectEdit() {
                 />
             </FormField>
 
-            <FormGroup widths='equal'>
-                <FormField>
-                    <Header content="Category"/>
-                    <Select
-                        options={categoryOptions}
-                        value={category}
-                        onChange={(_, data) => setCategory(data.value as string)}
-                    />
-                </FormField>
-                <FormField>
-                    <Header content="Tags"/>
-                    <Input
-                        value={inputTagValue}
-                        onChange={(e) => setInputTagValue(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                        placeholder='Type a tag and press enter'
-                    />
-                    <div>
-                        {tags.map(tag => (
-                            <Label key={tag} style={{ margin: '5px' }}>
-                                {tag}
-                                <Icon name='delete' onClick={() => handleRemoveTag(tag)} />
-                            </Label>
-                        ))}
-                    </div>
-                </FormField>
-            </FormGroup>
+
+            <FormField>
+                <Header content="Tags"/>
+                <Input
+                    value={inputTagValue}
+                    onChange={(e) => setInputTagValue(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder='Type a tag and press enter'
+                />
+                <div>
+                    {tags.map(tag => (
+                        <Label key={tag} style={{ margin: '5px' }}>
+                            {tag}
+                            <Icon name='delete' onClick={() => handleRemoveTag(tag)} />
+                        </Label>
+                    ))}
+                </div>
+            </FormField>
             <FormField>
                 <Header content="Content"/>
                 <ReactQuill

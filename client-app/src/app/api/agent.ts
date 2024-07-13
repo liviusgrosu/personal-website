@@ -33,8 +33,8 @@ const Projects = {
     getList: (predicate: string) => requests.get<Project[]>(`/project?category=${predicate}`),
     getDetails: (id: string) => requests.get<IProjectDetail>(`/project/${id}`),
     createDetails: (details: ProjectDetail) => requests.post(`/project`, details),
-    delete: (id: string) => requests.del(`/project/${id}`),
     updateDetails: (details: IProjectDetail) => requests.put(`/project`, details),
+    delete: (id: string) => requests.del(`/project/${id}`),
     updatePhoto: (id: string, file: Blob) => {
         const formData = new FormData;
         formData.append('File', file);
@@ -49,6 +49,7 @@ const Blogs = {
     getDetails: (id: string) => requests.get<IBlogPostDetail>(`/blogPost/${id}`),
     createDetails: (details: BlogPostDetail) => requests.post(`/blogPost`, details),
     updateDetails: (details: IBlogPostDetail) => requests.put(`/blogPost`, details),
+    delete: (id: string) => requests.del(`/blogPost/${id}`),
 }
 
 const Account = {

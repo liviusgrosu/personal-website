@@ -64,6 +64,16 @@ export default class BlogPostStore {
         }
     }
 
+    deleteBlogPost = async (id: string) => {
+        try {
+            await agent.Blogs.delete(id);
+            this.blogPosts = this.blogPosts.filter(blogPost => blogPost.id !== id);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     clearSelectedBlogPostDetails = () => {
         this.selectedBlogPostDetails = null;
     }

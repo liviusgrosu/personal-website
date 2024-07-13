@@ -28,13 +28,13 @@ namespace API.Controllers
         }
         
         [HttpPut]
-        public async Task<IActionResult> EditActivity(BlogPost blogPost)
+        public async Task<IActionResult> EditBlogPost(BlogPost blogPost)
         {
             return HandleResult(await Mediator.Send(new Edit.Command { BlogPost = blogPost }));
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteActivity(Guid id)
+        public async Task<IActionResult> DeleteBlogPost(Guid id)
         {
             return HandleResult(await Mediator.Send(new Delete.Command { Id = id }));
         }

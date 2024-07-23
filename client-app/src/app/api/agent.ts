@@ -50,6 +50,13 @@ const Blogs = {
     createDetails: (details: BlogPostDetail) => requests.post(`/blogPost`, details),
     updateDetails: (details: IBlogPostDetail) => requests.put(`/blogPost`, details),
     delete: (id: string) => requests.del(`/blogPost/${id}`),
+    updatePhoto: (id: string, file: Blob) => {
+        const formData = new FormData;
+        formData.append('File', file);
+        return axios.post<Photo>(`/blogPost/coverPhoto/${id}`, formData, {
+            headers: {'Content-Type': 'multipart/form-data'}
+        })
+    }
 }
 
 const Account = {

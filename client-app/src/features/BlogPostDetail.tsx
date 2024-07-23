@@ -3,14 +3,15 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
 import { useEffect } from "react";
-import { Button, ButtonGroup, Header } from "semantic-ui-react";
+import { Button, ButtonGroup, Header, Label } from "semantic-ui-react";
 import PhotoUploadWidget from "../app/imageUpload/PhotoUploadWidget";
 import BlogPostDelete from "./BlogPostDelete";
+import { format } from "date-fns";
 
 export default observer(function BlogPostDetail() {
     const navigate = useNavigate();
     const {blogPostStore, modalStore, commonStore: {token}} = useStore();
-    const {selectedBlogPostDetails, loadBlogPostsDetails, clearSelectedBlogPostDetails} = blogPostStore;
+    const {selectedBlogPostDetails, loadBlogPostsDetails, clearSelectedBlogPostDetails, uploadPhoto} = blogPostStore;
 
     const {id} = useParams();
 
@@ -29,9 +30,9 @@ export default observer(function BlogPostDetail() {
     };
 
     function handlePhotoUpload(file: Blob) {
-        //uploadPhoto(id!.toString(), file);
+        uploadPhoto(id!.toString(), file);
         modalStore.closeModal();
-        navigate('/projects');
+        navigate('/blog');
     }
 
 
@@ -73,6 +74,7 @@ export default observer(function BlogPostDetail() {
         {selectedBlogPostDetails && (
             <>
                 <Header content={selectedBlogPostDetails.title} />
+                <Header sub content={format(selectedBlogPostDetails.date, 'dd MMM yyyy h:mm aa')}/>
                 <div dangerouslySetInnerHTML={{__html: selectedBlogPostDetails.content}}/>
             </>
         )}     

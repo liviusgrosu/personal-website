@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useStore } from "../app/stores/store"
 import { observer } from "mobx-react-lite";
-import { Button, Grid, ItemGroup, Tab } from "semantic-ui-react";
+import { Button, Grid, GridColumn, ItemGroup, Tab } from "semantic-ui-react";
 import ProjectCard from "./ProjectCard";
 import { Link } from "react-router-dom";
 export default observer (function ProjectsPage() {
@@ -22,7 +22,7 @@ export default observer (function ProjectsPage() {
 
     return (
         <Grid>
-            <Grid.Column width={16}>
+            <GridColumn width={16}>
                 <Tab 
                     menu={{ secondary: true, pointing: true }} 
                     panes={panes} 
@@ -45,7 +45,7 @@ export default observer (function ProjectsPage() {
                         <ProjectCard key={project.id} project={project}/>
                     ))}
                 </ItemGroup>
-            </Grid.Column>
+            </GridColumn>
         </Grid>
     )
 })

@@ -36,12 +36,13 @@ export default class BlogPostStore {
         }
     }
 
-    createBlogPostDetails = async(title: string, date: Date, content: string) =>  {
+    createBlogPostDetails = async(title: string, description: string, date: Date, content: string) =>  {
         try {
             await agent.Blogs.createDetails(
                 new BlogPostDetail(
                     uuid(), 
                     title,
+                    description,
                     date, 
                     content
                 )
@@ -51,11 +52,12 @@ export default class BlogPostStore {
         }
     }
 
-    updateBlogPostDetails = async (title: string, date: Date, content: string) => {
+    updateBlogPostDetails = async (title: string, description: string, date: Date, content: string) => {
         console.log(`date2 : ${date}`)
         try {
             if (this.selectedBlogPostDetails) {
                 this.selectedBlogPostDetails.title = title;
+                this.selectedBlogPostDetails.description = description;
                 this.selectedBlogPostDetails.date = date;
                 this.selectedBlogPostDetails.content = content;
                 await agent.Blogs.updateDetails(this.selectedBlogPostDetails);

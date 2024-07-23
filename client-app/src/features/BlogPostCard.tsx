@@ -11,7 +11,7 @@ interface Props {
 
 export default observer(function BlogPostcard({blogPost}: Props) {
     return (
-        <Item as={Link} to={`/projects/${blogPost.id}`}>
+        <Item as={Link} to={`/blog/${blogPost.id}`}>
             <ItemImage src={blogPost.image || '/placeholder.png'} />
             <ItemContent>
                 <ItemHeader content={blogPost.title}/>

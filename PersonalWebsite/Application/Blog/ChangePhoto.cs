@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Projects
+namespace Application.Blog
 {
     public class ChangePhoto
     {
         public class Command : IRequest<Result<Photo>>
         {
             public IFormFile File { get; set; }
-            public Guid ProjectId { get; set; }
+            public Guid BlogPostId { get; set; }
         }
 
         public class Handler : IRequestHandler<Command, Result<Photo>>
@@ -29,12 +29,12 @@ namespace Application.Projects
 
             public async Task<Result<Photo>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var project = await _context.Projects
-                    .FirstOrDefaultAsync(b => b.Id == request.ProjectId);
+                var blogPost = await _context.BlogPosts
+                    .FirstOrDefaultAsync(b => b.Id == request.BlogPostId);
 
-                if (project == null)
+                if (blogPost == null)
                 {
-                    return Result<Photo>.Failure("Project not found");
+                    return Result<Photo>.Failure("Blog post not found");
                 }
 
                 var photoUploadResult = await _photoAccessor.AddPhoto(request.File);
@@ -46,7 +46,7 @@ namespace Application.Projects
                 };
 
                 _context.Photos.Add(photo);
-                project.Image = photo.Url;
+                blogPost.Image = photo.Url;
 
                 var result = await _context.SaveChangesAsync() > 0;
                 if (result)

@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { ErrorMessage, Form, Formik } from "formik";
-import { Button, Header, Label } from "semantic-ui-react";
+import { Button, Divider, Header, Label } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import MyTextInput from "../app/common/MyTextInput";
@@ -15,7 +15,11 @@ export default observer (function LoginForm() {
 
             {({handleSubmit, isSubmitting, errors}) => (
                 <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
-                    <Header as='h2' content='Login' color="teal" textAlign="center"/>
+                    <Divider horizontal>
+                        <Header as='h3'>
+                            Login
+                        </Header>
+                    </Divider>
                     <MyTextInput placeholder="Email" name='email'/>
                     <MyTextInput placeholder="Password" name='password' type='password'/>
                     <ErrorMessage

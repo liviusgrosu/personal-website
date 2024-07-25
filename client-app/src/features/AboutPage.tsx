@@ -19,6 +19,9 @@ export default observer (function AboutPage() {
                 content="Edit About"
                 as={Link}
                 to={`/about-edit`}
+                style={{ marginBottom: '15px' }}
+                fluid
+                primary
             /> 
             )}
             <div dangerouslySetInnerHTML={{__html: aboutText }}/>

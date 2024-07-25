@@ -1,15 +1,13 @@
+import { useMediaQuery } from 'react-responsive'
 import { NavLink } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
+import NavbarMb from './NavBarMb';
 
 export default function NavBar() {
 
-    return (
-        <Menu 
-            inverted
-            borderless
-            compact
-        >
-            <Menu.Menu position='right'>
+    const renderLinks = () => {
+        return (
+            <>
                 <Menu.Item
                     name='About'
                     as={NavLink}
@@ -30,7 +28,14 @@ export default function NavBar() {
                     as={NavLink}
                     to='/contact'
                 />
-            </Menu.Menu>
-        </Menu>
-    )
+            </>
+        )
+    };
+    const sm = useMediaQuery({ query: "(min-width:576px)" });
+    const size = {sm};
+    return (
+        <div>
+            <NavbarMb renderLinks={renderLinks}/>
+        </div>
+    )    
 }

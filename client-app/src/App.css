@@ -18,6 +18,16 @@ body {
   }
 }
 
+.content {
+  margin-top: 100px !important;
+}
+
+@media (max-width: 600px) {
+  .content {
+    margin-top: 50px !important; 
+  }
+}
+
 .ui.inverted.vertical.center.aligned.segment {
   padding-top: 36px;
 }
@@ -96,6 +106,10 @@ nav.ui.container .ui.inverted.compact.menu .active.item{
 }
 
 .ui.modal > .actions {
+	background: rgb(51, 51, 51) !important;
+}
+
+.ui.inverted.menu {
 	background: rgb(51, 51, 51) !important;
 }
 

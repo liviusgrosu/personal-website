@@ -1,12 +1,19 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom';
-import { Header, Menu, MenuItem, Sidebar } from 'semantic-ui-react'
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Dimmer, Header, Icon, Menu, MenuItem, Sidebar } from 'semantic-ui-react'
 
 function NavbarMb() {
-    const [visible, setVisible] = useState(false)
+    const navigate = useNavigate();
+    const [visible, setVisible] = useState(false);
     const toggleSidebar = () => {
         visible ? setVisible(false) : setVisible(true)
     }
+
+    const navigateMenus = (menu: string) => {
+        navigate(menu);
+        toggleSidebar();
+    }
+
     return (
         <>
             <Menu inverted
@@ -18,49 +25,42 @@ function NavbarMb() {
                 </MenuItem>
                 <Menu.Menu position='right'>
                     <MenuItem onClick={toggleSidebar}>
-                    {visible && (
-                        <i className="big close red icon" />
-                    )}
-                    {!visible && (
-                        <i className="big bars icon inverted" />
-                    )}
+                        <Icon className="big bars icon inverted" />
                     </MenuItem>
                 </Menu.Menu>
             </Menu>
-            <Sidebar 
-                as={Menu}
-                animation='overlay'
-                icon='labeled'
-                inverted
-                vertical
-                width='thin'
-                visible={visible}
-            >
-                <MenuItem
-                    as={NavLink}
-                    to='/about'
+            <Dimmer active={visible} onClickOutside={toggleSidebar}>
+                <Sidebar 
+                    as={Menu}
+                    animation='overlay'
+                    icon='labeled'
+                    inverted
+                    vertical
+                    width='thin'
+                    visible={visible}
                 >
-                    <Header>About</Header>
-                </MenuItem> 
-                <MenuItem
-                    as={NavLink}
-                    to='/projects'
-                >
-                    <Header>Portfolio</Header>
-                </MenuItem>
-                <MenuItem
-                    as={NavLink}
-                    to='/blog'
-                >
-                    <Header>Blog Posts</Header>
-                </MenuItem>
-                <MenuItem
-                    as={NavLink}
-                    to='/contact'
+                    <MenuItem
+                        onClick={() => navigateMenus('/about')}
                     >
-                    <Header>Contact</Header>
-                </MenuItem>
-            </Sidebar>
+                        <Header>About</Header>
+                    </MenuItem> 
+                    <MenuItem
+                        onClick={() => navigateMenus('/projects')}
+                    >
+                        <Header>Portfolio</Header>
+                    </MenuItem>
+                    <MenuItem
+                        onClick={() => navigateMenus('/blog')}
+                    >
+                        <Header>Blog Posts</Header>
+                    </MenuItem>
+                    <MenuItem
+                        onClick={() => navigateMenus('/contact')}
+                        >
+                        <Header>Contact</Header>
+                    </MenuItem>
+                </Sidebar>
+            </Dimmer>
         </>
     )
 }

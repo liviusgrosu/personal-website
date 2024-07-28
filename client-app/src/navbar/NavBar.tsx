@@ -1,41 +1,18 @@
 import { useMediaQuery } from 'react-responsive'
-import { NavLink } from 'react-router-dom'
-import { Menu } from 'semantic-ui-react'
 import NavbarMb from './NavBarMb';
+import NavBarLg from './NavBarLg';
 
 export default function NavBar() {
-
-    const renderLinks = () => {
-        return (
-            <>
-                <Menu.Item
-                    name='About'
-                    as={NavLink}
-                    to='/about'
-                />
-                <Menu.Item
-                    name='Portfolio'
-                    as={NavLink}
-                    to='/projects'
-                />
-                <Menu.Item
-                    name='Blog Posts'
-                    as={NavLink}
-                    to='/blog'
-                />
-                <Menu.Item
-                    name='Contact'
-                    as={NavLink}
-                    to='/contact'
-                />
-            </>
-        )
-    };
-    const sm = useMediaQuery({ query: "(min-width:576px)" });
-    const size = {sm};
+    const none =useMediaQuery({ query: "(max-width:576px)" }) 
+    const sm = useMediaQuery({ query: "(min-width:576px)" })
+    const md = useMediaQuery({ query: "(min-width:768px)" })
+    const lg = useMediaQuery({ query: "(min-width:992px)" })
+    const xl = useMediaQuery({ query: "(min-width:1200px)" })
+    const xxl = useMediaQuery({ query: "(min-width:1400px)" })
+    const size = {none,sm,md,lg,xl,xxl}
     return (
         <div>
-            <NavbarMb renderLinks={renderLinks}/>
+            {size.sm ? <NavBarLg/> : <NavbarMb/>}
         </div>
     )    
 }

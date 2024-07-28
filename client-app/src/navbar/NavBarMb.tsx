@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Dimmer, Header, Icon, Menu, MenuItem, Sidebar } from 'semantic-ui-react'
 
 function NavbarMb() {

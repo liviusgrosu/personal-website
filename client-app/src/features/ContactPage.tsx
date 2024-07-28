@@ -17,7 +17,7 @@ export default function ContactPage() {
       return (
         <>
             <Divider horizontal>
-                <Header as='h4'>
+                <Header as='h3'>
                     Socials
                 </Header>
             </Divider>
@@ -39,7 +39,7 @@ export default function ContactPage() {
             />
             <Divider hidden />
             <Divider horizontal>
-                <Header as='h4'>
+                <Header as='h3'>
                     Email Me
                 </Header>
             </Divider>

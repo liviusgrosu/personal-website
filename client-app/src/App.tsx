@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
-import { Container, Header, Segment } from "semantic-ui-react";
-import NavBar from "./NavBar";
+import { Container, DimmerDimmable, Header, Segment } from "semantic-ui-react";
+import NavBar from "./navbar/NavBar";
 import { Outlet } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import ModalContainer from "./app/common/ModalContainer";
@@ -11,11 +11,12 @@ export default observer(function App() {
       inverted
       vertical
     >
+
       <ModalContainer/>
       <Container as="nav">
-        <Header inverted as="h1">
+        {/* <Header inverted as="h1">
             Livius Grosu
-        </Header>
+        </Header> */}
         <NavBar/>
       </Container>
       <Container 
@@ -24,6 +25,7 @@ export default observer(function App() {
       >
           <Outlet/>
       </Container>
+
     </Segment>
   );
 })

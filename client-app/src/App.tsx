@@ -21,7 +21,7 @@ export default observer(function App() {
       </Container>
       <Container 
         className="content" 
-        style={{ marginTop: '100px' }}
+        style={{ marginTop: '80px' }}
       >
           <Outlet/>
       </Container>

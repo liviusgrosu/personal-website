@@ -18,15 +18,11 @@ body {
   }
 }
 
-/* .content {
-  margin-top: 100px !important;
-} */
-
-/* @media (max-width: 600px) {
+@media (max-width: 500px) {
   .content {
-    margin-top: 50px !important; 
+    margin-top: 10px !important; 
   }
-} */
+}
 
 .ui.inverted.vertical.center.aligned.segment {
   padding-top: 36px;

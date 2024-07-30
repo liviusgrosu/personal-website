@@ -149,3 +149,8 @@ nav.ui.container .ui.inverted.compact.menu .active.item{
 .customDatePickerWidth > div > div.react-datepicker__input-container input {
    width: 100%;
 }
+
+.detailsPage img {
+  max-width: 100%;
+  height: auto;
+}

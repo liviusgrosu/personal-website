@@ -75,7 +75,7 @@ export default observer(function BlogPostDetail() {
             <>
                 <Header content={selectedBlogPostDetails.title} />
                 <Header sub content={format(selectedBlogPostDetails.date, 'dd MMM yyyy h:mm aa')}/>
-                <div dangerouslySetInnerHTML={{__html: selectedBlogPostDetails.content}}/>
+                <div className="detailsPage" dangerouslySetInnerHTML={{__html: selectedBlogPostDetails.content}}/>
             </>
         )}     
         </>

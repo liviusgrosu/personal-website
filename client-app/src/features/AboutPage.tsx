@@ -24,7 +24,7 @@ export default observer (function AboutPage() {
                 primary
             /> 
             )}
-            <div dangerouslySetInnerHTML={{__html: aboutText }}/>
+            <div className="detailsPage" dangerouslySetInnerHTML={{__html: aboutText }}/>
         </>
     )
 })

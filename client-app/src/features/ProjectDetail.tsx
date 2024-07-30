@@ -77,7 +77,7 @@ export default observer(function ProjectDetail() {
                             <Label content={tag} key={tag} style={{ margin: '5px' }}/>
                         ))}
                     </div>
-                    <div dangerouslySetInnerHTML={{__html: selectedProjectDetails.content}}/>
+                    <div className="detailsPage" dangerouslySetInnerHTML={{__html: selectedProjectDetails.content}}/>
                 </>
             )}            
         </>

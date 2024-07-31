@@ -139,7 +139,7 @@ export default observer(function ProjectEdit() {
                             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                             ['bold', 'italic', 'underline', 'strike', 'blockquote'],
                             [{ 'align': [] }],
-                            ['link', 'image'],
+                            ['link', 'image', 'video'],
                             ['clean']
                         ]
                     }}

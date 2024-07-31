@@ -29,7 +29,19 @@ export default class ProjectStore {
             const selectedProject = await agent.Projects.getDetails(id);
             runInAction(() => {
                 this.selectedProjectDetails = selectedProject;
-                this.selectedProjectDetails!.content = DOMPurify.sanitize(selectedProject.content)
+                this.selectedProjectDetails!.content = DOMPurify.sanitize(selectedProject.content, {
+                    ADD_TAGS: ['iframe'],
+                    ADD_ATTR: [
+                      'src',
+                      'width',
+                      'height',
+                      'frameborder',
+                      'allow',
+                      'allowfullscreen',
+                      'style',
+                      'loading',
+                      'scrolling'
+                    ]})
             })
         } catch (error) {
             console.log(error);

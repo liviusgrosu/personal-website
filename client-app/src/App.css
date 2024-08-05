@@ -176,3 +176,15 @@ nav.ui.container .ui.inverted.compact.menu .active.item{
   height: 100%;
   border: none; 
 }
+
+.ql-size-small {
+  font-size: 0.75em;
+}
+
+.ql-size-large {
+  font-size: 1.5em;
+}
+
+.ql-size-huge {
+  font-size: 2em;
+}

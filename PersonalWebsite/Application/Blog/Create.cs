@@ -1,4 +1,5 @@
 ﻿using Application.Core;
+using Common.Utils;
 using Domain;
 using FluentValidation;
 using MediatR;
@@ -32,6 +33,8 @@ namespace Application.Blog
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
+                request.BlogPost.Content = QuillConverter.ConvertQuillDeltaToHtml(request.BlogPost.Content);
+
                 _context.BlogPosts.Add(request.BlogPost);
 
                 var result = await _context.SaveChangesAsync() > 0;

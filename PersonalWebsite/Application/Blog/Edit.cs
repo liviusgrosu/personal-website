@@ -1,5 +1,6 @@
 ﻿using Application.Core;
 using AutoMapper;
+using Common.Utils;
 using Domain;
 using FluentValidation;
 using MediatR;
@@ -47,6 +48,8 @@ namespace Application.Blog
                 {
                     return Result<Unit>.Failure("Blog post not found");
                 }
+
+                request.BlogPost.Content = QuillConverter.ConvertQuillDeltaToHtml(request.BlogPost.Content);
 
                 _mapper.Map(request.BlogPost, blogPost);
 

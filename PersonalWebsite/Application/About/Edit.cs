@@ -1,14 +1,8 @@
 ﻿using Application.Core;
-using AutoMapper;
-using FluentValidation;
+using Common.Utils;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.About
 {
@@ -37,7 +31,7 @@ namespace Application.About
                     return null;
                 }
 
-                currentAbout.Content = request.Content.Content;
+                currentAbout.Content = QuillConverter.ConvertQuillDeltaToHtml(request.Content.Content);
 
                 var result = await _context.SaveChangesAsync() > 0;
 

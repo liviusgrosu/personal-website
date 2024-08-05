@@ -71,12 +71,13 @@ export default observer(function ProjectDetail() {
             )}
             {selectedProjectDetails && (
                 <>
-                    <Header content={selectedProjectDetails.title} />
+                    <Header content={selectedProjectDetails.title} as="h2"/>
                     <div>
                         {selectedProjectDetails?.tags.map(tag => (
                             <Label content={tag} key={tag} style={{ margin: '5px' }}/>
                         ))}
                     </div>
+                    
                     <div className="detailsPage" dangerouslySetInnerHTML={{__html: selectedProjectDetails.content}}/>
                 </>
             )}            

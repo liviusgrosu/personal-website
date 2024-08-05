@@ -1,7 +1,9 @@
 ﻿using Application.Core;
 using AutoMapper;
+using Common.Utils;
 using Domain;
 using FluentValidation;
+using HtmlAgilityPack;
 using MediatR;
 using Persistence;
 
@@ -41,6 +43,8 @@ namespace Application.Projects
                 {
                     return Result<Unit>.Failure("Project not found");
                 }
+
+                request.Project.Content = QuillConverter.ConvertQuillDeltaToHtml(request.Project.Content);
 
                 _mapper.Map(request.Project, project);
 

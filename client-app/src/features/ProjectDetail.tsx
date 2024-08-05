@@ -6,9 +6,6 @@ import { useEffect } from "react";
 import { Button, ButtonGroup, Header, Label } from "semantic-ui-react";
 import PhotoUploadWidget from "../app/imageUpload/PhotoUploadWidget";
 import ProjectDelete from "./ProjectDelete";
-import ResizableIframe from "../app/common/ResizableIframe";
-import FitIframes from "../app/common/FitIframes";
-import IframeResizer from "@iframe-resizer/react";
 
 export default observer(function ProjectDetail() {
     const navigate = useNavigate();
@@ -74,7 +71,7 @@ export default observer(function ProjectDetail() {
             )}
             {selectedProjectDetails && (
                 <>
-                    <Header content={selectedProjectDetails.title} />
+                    <Header content={selectedProjectDetails.title} as="h2"/>
                     <div>
                         {selectedProjectDetails?.tags.map(tag => (
                             <Label content={tag} key={tag} style={{ margin: '5px' }}/>

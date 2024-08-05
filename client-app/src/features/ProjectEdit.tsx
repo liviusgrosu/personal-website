@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Button, Form, GridColumn, FormField, Header, Icon, Input, Label, Select, TextArea, TextAreaProps, FormGroup } from "semantic-ui-react";
+import { Button, Form, FormField, Header, Icon, Input, Label, Select, TextArea, TextAreaProps, FormGroup } from "semantic-ui-react";
 import ReactQuill from "react-quill";
 import { categoryOptions } from "../app/common/options/categoryOptions";
 
@@ -135,13 +135,17 @@ export default observer(function ProjectEdit() {
                     onChange={(value: string) => setReactQuillContent(value)}
                     modules={{
                         toolbar: [
-                            [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+                            [{ 'header': '1' }, { 'header': '2' }, { 'header': '3' }, { 'font': [] }],
+                            [{ 'size': ['small', false, 'large', 'huge'] }],
                             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                             ['bold', 'italic', 'underline', 'strike', 'blockquote'],
                             [{ 'align': [] }],
                             ['link', 'image', 'video'],
                             ['clean']
-                        ]
+                        ],
+                    clipboard: {
+                        matchVisual: false
+                    }
                     }}
                 />
             </FormField>

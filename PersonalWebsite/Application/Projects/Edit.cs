@@ -1,5 +1,6 @@
 ﻿using Application.Core;
 using AutoMapper;
+using Common.Utils;
 using Domain;
 using FluentValidation;
 using HtmlAgilityPack;
@@ -43,22 +44,7 @@ namespace Application.Projects
                     return Result<Unit>.Failure("Project not found");
                 }
 
-                var doc = new HtmlAgilityPack.HtmlDocument();
-                doc.LoadHtml(request.Project.Content);
-
-                var iframeNode = doc.DocumentNode.SelectSingleNode("//iframe[@class='ql-video']");
-                if (iframeNode != null)
-                {
-                    iframeNode.SetAttributeValue("class", "responsive-iframe");
-
-                    var divNode = HtmlNode.CreateNode("<div></div>");
-                    divNode.SetAttributeValue("class", "videoContainer");
-
-                    divNode.AppendChild(iframeNode.CloneNode(true));
-                    iframeNode.ParentNode.ReplaceChild(divNode, iframeNode);
-
-                    request.Project.Content = doc.DocumentNode.OuterHtml;
-                }
+                request.Project.Content = QuillConverter.ConvertQuillDeltaToHtml(request.Project.Content);
 
                 _mapper.Map(request.Project, project);
 

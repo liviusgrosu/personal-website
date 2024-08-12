@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Button, Divider, Form, FormInput, FormTextArea, Header, Icon, Input } from "semantic-ui-react";
+import { Button, Divider, Form, FormInput, FormTextArea, Header } from "semantic-ui-react";
 
 export default function ContactPage() {
     
-    const [formData, setFormData] = useState({
+    const [formData] = useState({
         name: '',
         email: '',
         body: ''

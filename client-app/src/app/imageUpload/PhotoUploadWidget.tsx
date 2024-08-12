@@ -1,8 +1,7 @@
-import { Button, Grid, Header, Modal, ModalActions, ModalContent, ModalHeader } from "semantic-ui-react";
+import { Button, Grid, Header, ModalActions, ModalContent, ModalHeader } from "semantic-ui-react";
 import PhotoWidgetDropzone from "./PhotoWidgetDropzone";
 import { useEffect, useState } from "react";
 import PhotoWidgetCropper from "./PhotoWidgetCropper";
-import { useStore } from "../stores/store";
  
 interface Props {
     uploadPhoto: (file: Blob) => void;

@@ -24,14 +24,21 @@ namespace Application.About
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var currentAbout = await _context.AboutEntry.FirstAsync();
+                var currentAbout = await _context.AboutEntry.FirstOrDefaultAsync();
 
                 if (currentAbout == null)
                 {
-                    return null;
-                }
+                    currentAbout = new Domain.About
+                    {
+                        Content = QuillConverter.ConvertQuillDeltaToHtml(request.Content.Content)
+                    };
 
-                currentAbout.Content = QuillConverter.ConvertQuillDeltaToHtml(request.Content.Content);
+                    _context.AboutEntry.Add(currentAbout);
+                }
+                else
+                {
+                    currentAbout.Content = QuillConverter.ConvertQuillDeltaToHtml(request.Content.Content);
+                }
 
                 var result = await _context.SaveChangesAsync() > 0;
 

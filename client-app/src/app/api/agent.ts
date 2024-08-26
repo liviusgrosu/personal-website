@@ -5,7 +5,7 @@ import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store";
 import { AboutContent } from "../models/about";
 
-axios.defaults.baseURL = 'http://localhost:7117';
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
 axios.interceptors.request.use(config => {
     const token = store.commonStore.token;

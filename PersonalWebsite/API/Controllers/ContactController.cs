@@ -1,4 +1,5 @@
 ﻿using API.Services;
+using Application.Contact;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,7 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> SendContactEmail([FromBody] ContactRequest request)
+        public async Task<IActionResult> SendContactEmail([FromBody] ContactRequestDto request)
         {
             await _emailService.SendEmailAsync(
                 request.FromEmail,
@@ -24,13 +25,6 @@ namespace API.Controllers
             );
 
             return Ok("Email sent successfully");
-        }
-
-        public class ContactRequest
-        {
-            public string FromEmail { get; set; }
-            public string Subject { get; set; }
-            public string Message { get; set; }
         }
     }
 }

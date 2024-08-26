@@ -32,18 +32,24 @@ namespace Persistence
                     new BlogPost
                     {
                         Title = "Test blog 1",
+                        Description = "Description 1",
+                        Image = "",
                         Content = "<p>stupid</p>",
                         Date = DateTime.UtcNow.AddMonths(-1),
                     },
                     new BlogPost
                     {
                         Title = "Test blog 2",
+                        Description = "Description 2",
+                        Image = "",
                         Content = "<p>gdfgdfg</p>",
                         Date = DateTime.UtcNow.AddMonths(-2),
                     },
                     new BlogPost
                     {
                         Title = "Test blog 2",
+                        Description = "Description 3",
+                        Image = "",
                         Content = "<p>asdasdas</p>",
                         Date = DateTime.UtcNow.AddMonths(-3),
                     }
@@ -60,8 +66,8 @@ namespace Persistence
                         Title = "Test project 1",
                         Description = "Description 1",
                         Content = "<p>stupid</p>",
-                        Category = "webdev",
                         Image = "https://res.cloudinary.com/dobxnbfvx/image/upload/v1714269552/ysbtccbjtlu2i2biptoj.png",
+                        Category = "webdev",
                         Tags = new List<string> { "C#", "C++" }
                     },
                     new Project
@@ -69,8 +75,8 @@ namespace Persistence
                         Title = "Test project 2",
                         Description = "Description 2",
                         Content = "<p>gdfgdfg</p>",
-                        Category = "gamedev",
                         Image = "https://res.cloudinary.com/dobxnbfvx/image/upload/v1714269348/qdr5bkh8ctzad7bn8mbu.png",
+                        Category = "gamedev",
                         Tags = new List<string> { "Python", "Jinja", ".NET" }
                     },
                     new Project
@@ -78,8 +84,8 @@ namespace Persistence
                         Title = "Test project 2",
                         Description = "Description 3",
                         Content = "<p>other</p>",
-                        Category = "other",
                         Image = "https://res.cloudinary.com/dobxnbfvx/image/upload/v1714094769/o1rc4u7zftpfz0qv1aok.jpg",
+                        Category = "other",
                         Tags = new List<string> { }
                     }
                 };

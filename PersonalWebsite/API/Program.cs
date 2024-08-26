@@ -1,5 +1,7 @@
 using API.Extensions;
 using API.Middleware;
+using API.Services;
+
 //using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,7 +21,8 @@ builder.Services.AddControllers(opt =>
 });
 builder.Services
         .AddApplicationServices(builder.Configuration)
-        .AddIdentityServices(builder.Configuration);
+        .AddIdentityServices(builder.Configuration)
+        .AddScoped<EmailService>();
 
 var app = builder.Build();
 

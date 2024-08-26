@@ -19,9 +19,9 @@ namespace API.Controllers
         public async Task<IActionResult> SendContactEmail([FromBody] ContactRequestDto request)
         {
             await _emailService.SendEmailAsync(
-                request.FromEmail,
-                request.Subject,
-                request.Message 
+                request.Name,
+                request.Email,
+                request.Body
             );
 
             return Ok("Email sent successfully");

@@ -4,6 +4,7 @@ import { BlogPost, BlogPostDetail, IBlogPostDetail } from "../models/blogPost";
 import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store";
 import { AboutContent } from "../models/about";
+import { ContactRequest } from "../models/contactRequest";
 
 axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -59,6 +60,10 @@ const Blogs = {
     }
 }
 
+const Contact = {
+    contactRequest: (email: ContactRequest) => axios.post(`/contact`, email)
+}
+
 const Account = {
     current: () => requests.get<User>('/account'),
     login: (user: UserFormValues) => requests.post<User>('/account/login', user),
@@ -68,7 +73,8 @@ const agent = {
     About,
     Projects,
     Blogs,
-    Account
+    Account,
+    Contact
 }
 
 export default agent;

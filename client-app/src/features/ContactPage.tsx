@@ -1,20 +1,29 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Button, Divider, Form, FormInput, FormTextArea, Header } from "semantic-ui-react";
+import agent from "../app/api/agent";
 
 export default function ContactPage() {
     
-    const [formData] = useState({
+    const [formData, setFormData] = useState({
         name: '',
         email: '',
         body: ''
       });
     
-      const handleSubmit = () => {
-        console.log('Form data submitted:', formData);
-        // Handle form submission logic here
-      };
+
+    const handleChange = (e : ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+
+    const handleSubmit = async () => {
+    await agent.Contact.contactRequest(formData);
+    };
     
-      return (
+    return (
         <>
             <Divider horizontal>
                 <Header as='h3'>
@@ -50,6 +59,7 @@ export default function ContactPage() {
                     name='name'
                     value={formData.name}
                     placeholder='Enter your name'
+                    onChange={handleChange}
                 />
                 <FormInput
                     label='Email'
@@ -57,15 +67,17 @@ export default function ContactPage() {
                     value={formData.email}
                     placeholder='Enter your email'
                     type='email'
+                    onChange={handleChange}
                 />
                 <FormTextArea
                     label='Body'
                     name='body'
                     value={formData.body}
                     placeholder='Enter the message body'
+                    onChange={handleChange}
                 />
                 <Button type='submit' primary>Submit</Button>
             </Form>
         </>
-      );
+    );
 }

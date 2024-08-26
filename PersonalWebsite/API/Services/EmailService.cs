@@ -20,13 +20,13 @@ namespace API.Services
             _toEmail = smtpSettings["ToEmail"];
         }
 
-        public async Task SendEmailAsync(string fromEmail, string subject, string body)
+        public async Task SendEmailAsync(string name, string email, string body)
         {
             var mailMessage = new MailMessage
             {
-                From = new MailAddress(fromEmail),
-                Subject = subject,
-                Body = $"From: {fromEmail}\n\n{body}",
+                From = new MailAddress(email),
+                Subject = $"Livius Grosu Site - Message from: {name}",
+                Body = $"From: {email}\n\n{body}",
                 IsBodyHtml = true,
             };
             mailMessage.To.Add(_toEmail);

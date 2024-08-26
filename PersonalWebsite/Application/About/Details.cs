@@ -29,16 +29,12 @@ namespace Application.About
 
             public async Task<Result<string>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var aboutEntry = await _context.AboutEntry
+                var content = await _context.AboutEntry
                     .ProjectTo<AboutDto>(_mapper.ConfigurationProvider)
-                    .FirstOrDefaultAsync();
+                    .Select(x => x.Content)
+                    .FirstOrDefaultAsync(cancellationToken);
 
-                if (aboutEntry == null)
-                {
-                    return null;
-                }
-
-                return Result<string>.Success(aboutEntry.Content);
+                return Result<string>.Success(content ?? string.Empty);
             }
         }
     }

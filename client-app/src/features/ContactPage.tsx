@@ -2,6 +2,20 @@ import { ChangeEvent, useState } from "react";
 import { Button, Divider, Form, FormInput, FormTextArea, Header, Message } from "semantic-ui-react";
 import { useStore } from "../app/stores/store";
 import { observer } from "mobx-react-lite";
+import * as Yup from 'yup';
+import { Formik, FormikHelpers } from "formik";
+
+interface FormValues {
+    name: string;
+    email: string;
+    body: string;
+}
+
+const validationSchema = Yup.object({
+    name: Yup.string().required('Name is required'),
+    email: Yup.string().email('Invalid email address').required('Email is required'),
+    body: Yup.string().required('Message body is required'),
+});
 
 export default observer ( function ContactPage() {
     
@@ -11,9 +25,8 @@ export default observer ( function ContactPage() {
         name: '',
         email: '',
         body: ''
-      });
+    });
     
-
     const handleChange = (e : ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({
             ...formData,
@@ -21,9 +34,16 @@ export default observer ( function ContactPage() {
         });
     };
 
-
-    const handleSubmit = async () => {
-        await contactStore.contactRequest(formData);
+    const handleSubmit = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
+        try {
+            await contactStore.contactRequest(values);
+            actions.resetForm();
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            actions.setErrors({ email: 'Error submitting form' });
+        } finally {
+            actions.setSubmitting(false);
+        }
     };
     
     return (
@@ -73,31 +93,45 @@ export default observer ( function ContactPage() {
                 />
             )}
 
-            <Form onSubmit={handleSubmit}>
-                <FormInput
-                    label='Name'
-                    name='name'
-                    value={formData.name}
-                    placeholder='Enter your name'
-                    onChange={handleChange}
-                />
-                <FormInput
-                    label='Email'
-                    name='email'
-                    value={formData.email}
-                    placeholder='Enter your email'
-                    type='email'
-                    onChange={handleChange}
-                />
-                <FormTextArea
-                    label='Body'
-                    name='body'
-                    value={formData.body}
-                    placeholder='Enter the message body'
-                    onChange={handleChange}
-                />
-                <Button loading={contactStore.loading} type='submit' primary>Submit</Button>
-            </Form>
+            <Formik
+                initialValues={{ name: '', email: '', body: '' }}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+            >
+                {({ values, handleChange, handleBlur, handleSubmit, errors, touched, isSubmitting }) => (
+                    <Form onSubmit={handleSubmit}>
+                        <FormInput
+                            label='Name'
+                            name='name'
+                            value={values.name}
+                            placeholder='Enter your name'
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={touched.name && errors.name ? errors.name : null} // Show error message
+                        />
+                        <FormInput
+                            label='Email'
+                            name='email'
+                            value={values.email}
+                            placeholder='Enter your email'
+                            type='email'
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={touched.email && errors.email ? errors.email : null} // Show error message
+                        />
+                        <FormTextArea
+                            label='Body'
+                            name='body'
+                            value={values.body}
+                            placeholder='Enter the message body'
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={touched.body && errors.body ? errors.body : null} // Show error message
+                        />
+                        <Button type='submit' primary loading={isSubmitting}>Submit</Button>
+                    </Form>
+                )}
+            </Formik>
         </>
     );
 })

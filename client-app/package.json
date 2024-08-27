@@ -28,7 +28,8 @@
     "react-router-dom": "^6.23.1",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^3.0.0-beta.2",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.5",

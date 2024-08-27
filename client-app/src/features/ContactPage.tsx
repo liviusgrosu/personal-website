@@ -1,4 +1,3 @@
-import { ChangeEvent, useState } from "react";
 import { Button, Divider, Form, FormInput, FormTextArea, Header, Message } from "semantic-ui-react";
 import { useStore } from "../app/stores/store";
 import { observer } from "mobx-react-lite";

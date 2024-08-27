@@ -82,7 +82,7 @@ namespace API.Controllers
                     return BadRequest("Failed to update password.");
             }
 
-            return Ok("User updated successfully.");
+            return CreateUserObject(user);
         }
     }
 }

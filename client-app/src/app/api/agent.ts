@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { Photo, Project, IProjectDetail, ProjectDetail } from "../models/project";
 import { BlogPost, BlogPostDetail, IBlogPostDetail } from "../models/blogPost";
-import { User, UserFormValues } from "../models/user";
+import { ChangeLoginValues, User, UserFormValues } from "../models/user";
 import { store } from "../stores/store";
 import { AboutContent } from "../models/about";
 import { ContactRequest } from "../models/contactRequest";
@@ -67,6 +67,7 @@ const Contact = {
 const Account = {
     current: () => requests.get<User>('/account'),
     login: (user: UserFormValues) => requests.post<User>('/account/login', user),
+    changeAccountDetails: (newCredentials: ChangeLoginValues) => requests.put<User>('/account', newCredentials)
 }
 
 const agent = {

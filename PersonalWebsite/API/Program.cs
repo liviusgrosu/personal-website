@@ -1,6 +1,8 @@
 using API.Extensions;
 using API.Middleware;
 using API.Services;
+using AspNetCoreRateLimit;
+
 
 //using Domain;
 using Microsoft.AspNetCore.Authorization;
@@ -11,8 +13,9 @@ using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddMemoryCache();
 
+// Add services to the container.
 builder.Services.AddControllers(opt =>
 {
     // Every endpoint is going to require authentication
@@ -22,7 +25,11 @@ builder.Services.AddControllers(opt =>
 builder.Services
         .AddApplicationServices(builder.Configuration)
         .AddIdentityServices(builder.Configuration)
+        .AddInMemoryRateLimiting()
+        .AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>()
         .AddScoped<EmailService>();
+
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimitOptions"));
 
 var app = builder.Build();
 
@@ -39,6 +46,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("CorsPolicy");
 
+app.UseIpRateLimiting();
 app.UseAuthentication();
 app.UseAuthorization();
 

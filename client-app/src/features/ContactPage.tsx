@@ -12,27 +12,20 @@ interface FormValues {
 }
 
 const validationSchema = Yup.object({
-    name: Yup.string().required('Name is required'),
-    email: Yup.string().email('Invalid email address').required('Email is required'),
-    body: Yup.string().required('Message body is required'),
+    name: Yup.string()
+        .required('Name is required')
+        .max(100, 'Name must be less than 100 characters'),
+    email: Yup.string()
+        .email('Invalid email address')
+        .required('Email is required'),
+    body: Yup.string()
+        .required('Message body is required')
+        .max(1000, 'Message body must be less than 1000 characters'),
 });
 
 export default observer ( function ContactPage() {
     
     const {contactStore} = useStore();
-
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        body: ''
-    });
-    
-    const handleChange = (e : ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
 
     const handleSubmit = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
         try {

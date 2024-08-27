@@ -4,6 +4,7 @@ import ProjectStore from "./projectStore";
 import BlogPostStore from "./blogPostStore";
 import LoginStore from "./loginStore";
 import CommonStore from "./commonStore";
+import ContactStore from './contactStore';
 import ModalStore from "./modalStore";
 
 // Define the store
@@ -13,7 +14,8 @@ interface Store {
     blogPostStore: BlogPostStore,
     loginStore: LoginStore,
     commonStore: CommonStore,
-    modalStore: ModalStore
+    modalStore: ModalStore,
+    contactStore: ContactStore
 }
 
 // We instantiate our stores here
@@ -23,7 +25,8 @@ export const store: Store = {
     blogPostStore: new BlogPostStore(),
     loginStore: new LoginStore(),
     commonStore: new CommonStore(),
-    modalStore: new ModalStore()
+    modalStore: new ModalStore(),
+    contactStore: new ContactStore(),
 }
 
 // We create the react context of the store so its available to use between components

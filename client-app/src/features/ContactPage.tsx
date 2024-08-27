@@ -1,9 +1,12 @@
 import { ChangeEvent, useState } from "react";
-import { Button, Divider, Form, FormInput, FormTextArea, Header } from "semantic-ui-react";
-import agent from "../app/api/agent";
+import { Button, Divider, Form, FormInput, FormTextArea, Header, Message } from "semantic-ui-react";
+import { useStore } from "../app/stores/store";
+import { observer } from "mobx-react-lite";
 
-export default function ContactPage() {
+export default observer ( function ContactPage() {
     
+    const {contactStore} = useStore();
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -20,7 +23,7 @@ export default function ContactPage() {
 
 
     const handleSubmit = async () => {
-    await agent.Contact.contactRequest(formData);
+        await contactStore.contactRequest(formData);
     };
     
     return (
@@ -53,6 +56,23 @@ export default function ContactPage() {
                 </Header>
             </Divider>
             <Divider hidden />
+
+            {contactStore.successMessageVisible && (
+                <Message
+                    success
+                    header='Email Sent'
+                    content={contactStore.successMessage}
+                />
+            )}
+
+            {contactStore.error && (
+                <Message
+                    error
+                    header='Error'
+                    content={contactStore.error}
+                />
+            )}
+
             <Form onSubmit={handleSubmit}>
                 <FormInput
                     label='Name'
@@ -76,8 +96,8 @@ export default function ContactPage() {
                     placeholder='Enter the message body'
                     onChange={handleChange}
                 />
-                <Button type='submit' primary>Submit</Button>
+                <Button loading={contactStore.loading} type='submit' primary>Submit</Button>
             </Form>
         </>
     );
-}
+})

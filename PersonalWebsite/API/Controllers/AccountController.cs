@@ -58,5 +58,31 @@ namespace API.Controllers
                 Token = _tokenService.CreateToken(user),
             };
         }
+
+        [Authorize]
+        [HttpPut]
+        public async Task<ActionResult<UserDto>> ChangeCredentials(ChangeLoginDto newLoginDto)
+        {
+            var user = await _userManager.Users.FirstOrDefaultAsync();
+
+            if (user == null)
+                return NotFound("User not found.");
+
+            user.Email = newLoginDto.Email;
+
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
+                return BadRequest("Failed to update user.");
+
+            if (!string.IsNullOrEmpty(newLoginDto.CurrentPassword) && !string.IsNullOrEmpty(newLoginDto.NewPassword))
+            {
+                var passwordChangeResult = await _userManager.ChangePasswordAsync(user, newLoginDto.CurrentPassword, newLoginDto.NewPassword);
+
+                if (!passwordChangeResult.Succeeded)
+                    return BadRequest("Failed to update password.");
+            }
+
+            return Ok("User updated successfully.");
+        }
     }
 }

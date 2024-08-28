@@ -50,6 +50,7 @@ export default observer(function AboutEdit() {
                 modules={{
                 toolbar: [
                     [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+                    [{ 'size': ['small', false, 'large', 'huge'] }],
                     [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
                     [{ 'align': [] }],

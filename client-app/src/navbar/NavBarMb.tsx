@@ -20,7 +20,9 @@ function NavbarMb() {
                 borderless
                 attached
             >
-                <MenuItem>
+                <MenuItem
+                     onClick={() => navigate('/about')}
+                >
                     <Header inverted as="h1" content="Livius Grosu"/>
                 </MenuItem>
                 <Menu.Menu position='right'>

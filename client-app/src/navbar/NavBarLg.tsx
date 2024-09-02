@@ -1,12 +1,16 @@
-import { NavLink } from 'react-router-dom'
-import { Header, Menu } from 'semantic-ui-react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { Header, Menu, MenuItem } from 'semantic-ui-react'
 
 export default function NavBarLg() {
+    const navigate = useNavigate();
+    
     return (
         <>
-            <Header inverted as="h1">
-                Livius Grosu
-            </Header>
+            <MenuItem onClick={() => navigate('/about')}>
+                <Header inverted as="h1">
+                    Livius Grosu
+                </Header>
+            </MenuItem>
             <Menu 
             inverted
             borderless

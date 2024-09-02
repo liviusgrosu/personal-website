@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
 import { useEffect } from "react";
-import { Button, ButtonGroup, Header, Label } from "semantic-ui-react";
+import { Button, ButtonGroup, Header, Icon, Label } from "semantic-ui-react";
 import PhotoUploadWidget from "../app/imageUpload/PhotoUploadWidget";
 import ProjectDelete from "./ProjectDelete";
 
@@ -36,38 +36,53 @@ export default observer(function ProjectDetail() {
 
     return (
         <>
-            <Button 
-                icon="left arrow" 
-                content="Back"
-                onClick={handleBack}
-            />
+            <ButtonGroup>
+                <Button 
+                    icon="left arrow" 
+                    content="Back"
+                    onClick={handleBack}
+                />
+                {selectedProjectDetails && selectedProjectDetails.githubRepo != "" && (
+                    <Button 
+                        icon="github" 
+                        content="Check out the repo"
+                        color='black'
+                        href={selectedProjectDetails.githubRepo}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                    />
+                )}
+                
+            </ButtonGroup>
             {token && (
-                <ButtonGroup>
-                    <Button 
-                        icon="edit" 
-                        content="Edit"
-                        onClick={() => {navigate(`/projects-edit/${id}`)}}
-                    />
-                    <Button 
-                        icon="photo" 
-                        content="Photo"
-                        onClick={() => {
-                            modalStore.openModal(
-                                <PhotoUploadWidget uploadPhoto={handlePhotoUpload}/>,
-                            );
-                        }}
-                    />
-                    <Button 
-                        icon="trash" 
-                        content="Delete"
-                        color='red'
-                        onClick={() => {
-                            modalStore.openModal(
-                                <ProjectDelete/>,
-                            );
-                        }}
-                    />
-                </ButtonGroup>
+                <div style={{ marginTop: '20px' }}>
+                    <ButtonGroup>
+                        <Button 
+                            icon="edit" 
+                            content="Edit"
+                            onClick={() => {navigate(`/projects-edit/${id}`)}}
+                        />
+                        <Button 
+                            icon="photo" 
+                            content="Photo"
+                            onClick={() => {
+                                modalStore.openModal(
+                                    <PhotoUploadWidget uploadPhoto={handlePhotoUpload}/>,
+                                );
+                            }}
+                        />
+                        <Button 
+                            icon="trash" 
+                            content="Delete"
+                            color='red'
+                            onClick={() => {
+                                modalStore.openModal(
+                                    <ProjectDelete/>,
+                                );
+                            }}
+                        />
+                    </ButtonGroup>
+                </div>
             )}
             {selectedProjectDetails && (
                 <>

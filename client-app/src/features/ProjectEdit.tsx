@@ -17,6 +17,7 @@ export default observer(function ProjectEdit() {
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState(categoryOptions[0].value);
     const [tags, setTags] = useState<string[]>([]);
+    const [githubRepo, setGithubRepo] = useState('');
     const [inputTagValue, setInputTagValue] = useState<string>('');
 
     useEffect(() => {
@@ -35,15 +36,16 @@ export default observer(function ProjectEdit() {
             setDescription(selectedProjectDetails.description);
             setCategory(selectedProjectDetails.category);
             setTags(selectedProjectDetails.tags);
+            setGithubRepo(selectedProjectDetails.githubRepo);
         }
     }, [selectedProjectDetails]);
 
     const handleSubmit = async () => {
         if (id) {
-            await updateProjectDetails(title, description, category, reactQuillContent, tags);
+            await updateProjectDetails(title, description, category, reactQuillContent, tags, githubRepo);
             navigate(`/projects/${id}`);
         } else {
-            await createProjectDetails(title, description, category, reactQuillContent, tags);
+            await createProjectDetails(title, description, category, reactQuillContent, tags, githubRepo);
             navigate(`/projects`);
         }
     };
@@ -128,6 +130,17 @@ export default observer(function ProjectEdit() {
                     ))}
                 </div>
             </FormField>
+
+            <FormField>
+                <Header content="GitHub Repo (Optional)"/>
+                <Input
+                    defaultValue={githubRepo}
+                    placeholder='Enter in a GitHub repository link'
+                    fluid
+                    onChange={(event) => setGithubRepo(event.target.value)}
+                />
+            </FormField>
+
             <FormField>
                 <Header content="Content"/>
                 <ReactQuill

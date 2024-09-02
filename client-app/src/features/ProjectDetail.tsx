@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../app/stores/store";
 import { useParams, useNavigate  } from "react-router-dom";
 import { useEffect } from "react";
-import { Button, ButtonGroup, Header, Icon, Label } from "semantic-ui-react";
+import { Button, ButtonGroup, Header, Label } from "semantic-ui-react";
 import PhotoUploadWidget from "../app/imageUpload/PhotoUploadWidget";
 import ProjectDelete from "./ProjectDelete";
 

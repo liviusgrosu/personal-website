@@ -11,5 +11,6 @@ namespace Domain
         public string Image { get; set; }
         public string Category { get; set; }
         public ICollection<string> Tags { get; set; }
+        public string GithubRepo { get; set; }
     }
 }

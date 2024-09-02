@@ -33,6 +33,7 @@ export class Project implements IProject {
 
 export interface IProjectDetail extends IProject {
     content: string;
+    githubRepo: string;
 }
 
 export class ProjectDetail extends Project implements IProjectDetail {
@@ -42,11 +43,14 @@ export class ProjectDetail extends Project implements IProjectDetail {
         description: string,
         category: string,
         content: string,
-        tags: string[]) {
+        tags: string[],
+        githubRepo: string) {
         super(id, title, description, category, '', tags);
         this.content = content;
+        this.githubRepo = githubRepo;
     }
     content: string;
+    githubRepo: string;
 }
 
 export interface Photo {

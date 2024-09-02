@@ -48,7 +48,7 @@ export default class ProjectStore {
         }
     }
 
-    createProjectDetails = async(title: string, description: string, category: string, content: string, tags: string[]) =>  {
+    createProjectDetails = async(title: string, description: string, category: string, content: string, tags: string[], githubRepo: string) =>  {
         try {
             await agent.Projects.createDetails(
                 new ProjectDetail(
@@ -57,7 +57,8 @@ export default class ProjectStore {
                     description,
                     category, 
                     content,
-                    tags
+                    tags,
+                    githubRepo
                 )
             );
         } catch (error) {
@@ -74,7 +75,7 @@ export default class ProjectStore {
         }
     }
 
-    updateProjectDetails = async (title: string, description: string, category: string, content: string, tags: string[]) => {
+    updateProjectDetails = async (title: string, description: string, category: string, content: string, tags: string[], githubRepo: string) => {
         try {
             if (this.selectedProjectDetails) {
                 this.selectedProjectDetails.title = title;
@@ -82,6 +83,7 @@ export default class ProjectStore {
                 this.selectedProjectDetails.category = category;
                 this.selectedProjectDetails.content = content;
                 this.selectedProjectDetails.tags = tags;
+                this.selectedProjectDetails.githubRepo = githubRepo;
                 await agent.Projects.updateDetails(this.selectedProjectDetails);
             }
         } catch (error) {
